@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> Programm </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Programm</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-card *ngFor="let item of getdataservice.data">
+    <ion-card-header>
+      <ion-card-title>{{ item.titel }}</ion-card-title>
+      <ion-card-subtitle>{{ item.beginn }} – {{ item.ende }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content [innerHTML]="item.beschreibung">
+      Global Counter: {{ getdataservice.counter}}
+      <ion-button (click)="getdataservice.incrementCounter()"
+        >Increment</ion-button
+      >
+      <ion-button (click)="getdataservice.decrementCounter()"
+        >Decrement</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
 
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>

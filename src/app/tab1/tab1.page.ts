@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GetdataService } from '../services/getdata.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,7 +8,5 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class Tab1Page {
-
-  constructor() {}
-
+  constructor(public getdataservice: GetdataService) {}
 }
