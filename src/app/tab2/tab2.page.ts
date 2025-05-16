@@ -11,7 +11,10 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonItem,
+  IonLabel,
 } from '@ionic/angular/standalone';
+import { IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { GetdataService } from '../services/getdata.service';
 
@@ -32,6 +35,9 @@ import { GetdataService } from '../services/getdata.service';
     IonCardHeader,
     IonCardSubtitle,
     IonCardTitle,
+    IonIcon,
+    IonItem,
+    IonLabel,
     ExploreContainerComponentModule,
   ],
 })

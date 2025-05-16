@@ -10,22 +10,65 @@
       <ion-title size="large">Programm</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card *ngFor="let item of getdataservice.data">
-    <ion-card-header>
-      <ion-card-title>{{ item.titel }}</ion-card-title>
-      <ion-card-subtitle>{{ item.beginn }} – {{ item.ende }}</ion-card-subtitle>
-    </ion-card-header>
 
-    <ion-card-content [innerHTML]="item.beschreibung">
-      Global Counter: {{ getdataservice.counter}}
-      <ion-button (click)="getdataservice.incrementCounter()"
-        >Increment</ion-button
-      >
-      <ion-button (click)="getdataservice.decrementCounter()"
-        >Decrement</ion-button
-      >
-    </ion-card-content>
-  </ion-card>
+  <ng-container *ngFor="let group of getdataservice.getGroupedData()">
+    <!-- Überschrift für Uhrzeit -->
+    <ion-item lines="none" class="group-header">
+      <ion-label>
+        <h2>{{ group.time.replace(':', '.') }} Uhr</h2>
+      </ion-label>
+    </ion-item>
+
+    <!-- Karten für diese Uhrzeit -->
+    <ion-card *ngFor="let item of group.items">
+      <ion-card-header
+        >‚
+        <ion-card-title>{{ item.titel }}</ion-card-title>
+        <ion-card-subtitle>
+          <ion-icon class="time" name="time-outline"></ion-icon>
+          {{ item.beginn }} – {{ item.ende }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="meta-icons">
+          <div class="left-icons">
+            <ng-container *ngIf="item.kinder">
+              <ion-icon
+                src="assets/lndw_icon_kids.svg"
+                title="Kinder geeignet"
+              ></ion-icon>
+              <span class="divider" *ngIf="(item.barrierefrei || item.english)"
+                >|</span
+              >
+            </ng-container>
+            <ng-container *ngIf="item.barrierefrei">
+              <ion-icon
+                src="assets/lndw_icon_barrierenfrei.svg"
+                title="Barrierefrei"
+              ></ion-icon>
+              <span class="divider" *ngIf="item.english">|</span>
+            </ng-container>
+            <ng-container *ngIf="item.english">
+              <ion-icon
+                src="assets/lndw_icon_englisch.svg"
+                title="English available"
+              ></ion-icon>
+            </ng-container>
+          </div>
+
+          <span class="format-text" [innerHTML]="item.format"></span>
+        </div>
+
+        <!-- Counter ist ausgeblendet -->
+        <!--<div class="counter-block">
+          Global Counter: {{ getdataservice.counter }}
+          <ion-button size="small" (click)="getdataservice.incrementCounter()">+</ion-button>
+          <ion-button size="small" (click)="getdataservice.decrementCounter()">−</ion-button>
+        </div>-->
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
   <app-explore-container name="Tab 2 page"></app-explore-container>
 </ion-content>
