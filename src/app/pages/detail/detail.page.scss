@@ -49,3 +49,10 @@ ion-label h2 {
   font-size: 1.4rem;
   font-weight: 600;
 }
+
+/* Abstand unter dem Infotext (Beschreibung im ersten Item) */
+ion-list > ion-item:first-of-type ion-label > div {
+  display: block;
+  margin-bottom: 1%; /* ggf. 0.75rem, wenn du etwas mehr möchtest */
+  margin-top: 1%;
+}
