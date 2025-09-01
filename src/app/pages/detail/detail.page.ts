@@ -38,7 +38,6 @@ import { GetdataService, EintragData } from '../../services/getdata.service';
   ],
 })
 export class DetailPage {
-  // Signals für Ladezustand und aktuellen Eintrag
   private loadingSig = signal<boolean>(true);
   private entrySig = signal<EintragData | null>(null);
 
@@ -52,7 +51,6 @@ export class DetailPage {
     const id = this.route.snapshot.paramMap.get('id');
     const terminId = this.route.snapshot.paramMap.get('termin_id');
 
-    // Falls die Daten noch nicht geladen sind und dein Service eine loadData-Methode hat, nachladen
     if (
       !this.getdata.data?.length &&
       typeof (this.getdata as any).loadData === 'function'
@@ -60,7 +58,7 @@ export class DetailPage {
       try {
         await (this.getdata as any).loadData();
       } catch {
-        // Ignorieren – wir zeigen unten ggf. "Nicht gefunden"
+        // ignorieren
       }
     }
 
@@ -77,8 +75,6 @@ export class DetailPage {
     this.loadingSig.set(false);
   }
 
-  // --- Methoden, die dein Template aufruft --- //
-
   back() {
     this.nav.back();
   }
@@ -89,5 +85,17 @@ export class DetailPage {
 
   entry(): EintragData | null {
     return this.entrySig();
+  }
+
+  isFav(): boolean {
+    const e = this.entrySig();
+    if (!e) return false;
+    return this.getdata.isFavorit(e.id, e.termin_id);
+  }
+
+  toggleFav() {
+    const e = this.entrySig();
+    if (!e) return;
+    this.getdata.toogleFavorit(e.id, e.termin_id);
   }
 }

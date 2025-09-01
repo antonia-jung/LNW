@@ -1,88 +1,51 @@
-ion-card-header {
-  background-color: #f0f0f0;
+/* Farben & Grundtext auf der Seite */
+:host {
+  --lnw-lila: #6748B1;
+  --ion-text-color: var(--lnw-lila);
+  color: var(--ion-text-color);
 }
 
-ion-card-title,
-ion-card-subtitle {
-  color: #6748B1;
+/* HEADER: Verlauf + weiße Schrift/Icons */
+ion-toolbar {
+  /* Verlauf wie zuvor */
+  --background: linear-gradient(to right, #6748B1, #4B3991);
+
+  /* WICHTIG: steuert Titel- & Button-Farbe im Toolbar */
+  --color: #ffffff;
 }
 
-ion-card-title {
-  font-size: 1.5rem;
+/* Falls einzelne Unterelemente trotzig sind: hart weiß erzwingen */
+ion-toolbar ion-title {
+  color: #ffffff;
+}
+ion-toolbar ion-button {
+  /* Ionic-Buttons respektieren --color, das hier doppelt absichern */
+  --color: #ffffff;
+  color: #ffffff;
+}
+ion-toolbar ion-icon {
+  color: #ffffff;
 }
 
-.platform-ios ion-card-title {
-  font-size: 0.5rem;
-}
-
+/* Content (weißer Hintergrund, Text in Lilaton) */
 ion-content {
   --background: #ffffff;
+  color: var(--ion-text-color);
 }
 
-ion-card-content {
-  background-color: #ffffff;
-  color: #4B3991 !important;
-  padding: 1% 1% 1% 1%;
+/* Items/Labels im Content */
+ion-item {
+  --color: var(--ion-text-color);
+}
+ion-label,
+h1, h2, h3, h4, h5, h6,
+p, span {
+  color: inherit;
 }
 
-ion-toolbar {
-  --background: linear-gradient(to right, #6748B1, #4B3991);
-}
-
-ion-tab-bar {
-  --background: #6748B1 !important;
-}
-
-.time {
-  font-size: 12px;
-  color: #4B3991;
-}
-
-.meta-icons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-
-  .left-icons {
-    display: flex;
-    gap: 8px;
-
-    ion-icon {
-      font-size: 20px;
-      color: #F6692C;
-      position: relative;
-    }
-  }
-
-  .format-text {
-    font-weight: bold;
-    text-align: right;
-    min-width: 80px;
-  }
-
-  .divider {
-  margin: 0 6px;
-  color: #F6692C;
-  font-size: 14px;
-}
-}
-
-.group-header {
-  --background: #ffffff; // heller Hintergrund
-  padding: 12px 16px;
-
-  ion-label h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #F6692C; // passend zu deinem Farbschema
-  }
-}
-
-.fav-btn {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  z-index: 2;
+/* (Optional) Detail-Titel größer lassen – falls gewünscht anpassen */
+ion-label h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
