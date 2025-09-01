@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detailansicht</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-eintrag *ngIf="eintrag" [eintrag]="eintrag"></app-eintrag>
+
+  <ng-container *ngIf="!eintrag">
+    <p style="padding: 16px">Kein Eintrag gefunden.</p>
+  </ng-container>
+</ion-content>

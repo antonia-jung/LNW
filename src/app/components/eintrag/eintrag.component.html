@@ -1,0 +1,18 @@
+<p>eintrag works!</p>
+<ion-card>
+  <ion-card-header>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>{{ eintrag.titel }}</h2>
+        <p>
+          <ion-icon class="time" name="time-outline"></ion-icon>
+          {{ eintrag.beginn }} – {{ eintrag.ende }}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card-header>
+
+  <ion-card-content>
+    {{ eintrag.format }}
+  </ion-card-content>
+</ion-card>

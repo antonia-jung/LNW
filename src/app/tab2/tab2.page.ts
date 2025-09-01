@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-
-import { GetdataService } from '../services/getdata.service';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { GetdataService } from '../services/getdata.service';
 
 @Component({
   selector: 'app-tab2',
@@ -13,9 +13,13 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
   imports: [CommonModule, IonicModule, ExploreContainerComponentModule],
 })
 export class Tab2Page {
-  constructor(public getdata: GetdataService) {}
+  constructor(public getdata: GetdataService, private router: Router) {}
 
   trackById(_: number, item: { id: string; termin_id: string }) {
     return `${item.id}-${item.termin_id}`;
+  }
+
+  openDetail(item: { id: string; termin_id: string }) {
+    this.router.navigate(['/detail', item.id, item.termin_id]);
   }
 }

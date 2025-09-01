@@ -6,4 +6,9 @@ export const routes: Routes = [
     path: '',
     component: TabsPage,
   },
+  {
+    path: 'detail/:id/:termin_id',
+    loadComponent: () =>
+      import('./pages/detail/detail.page').then((m) => m.DetailPage),
+  },
 ];
