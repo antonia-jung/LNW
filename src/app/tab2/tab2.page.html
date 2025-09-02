@@ -89,4 +89,33 @@
   </ng-container>
 
   <app-explore-container name="Tab 2 page"></app-explore-container>
+
+  <!-- FAB: unten rechts, mit expandierender Liste nach oben -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
+    <!-- Haupt-FAB (öffnet/schließt die Liste automatisch) -->
+    <ion-fab-button class="fab-orange" aria-label="Menü">
+      <ion-icon name="filter-outline"></ion-icon>
+    </ion-fab-button>
+
+    <!-- Drei zusätzliche Actions nach oben -->
+    <ion-fab-list side="top">
+      <ion-fab-button class="fab-action">
+        <ion-icon
+          src="assets/lndw_icon_kids.svg"
+          title="Kinder geeignet"
+        ></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="fab-action" aria-label="Filtern">
+        <ion-icon
+          src="assets/lndw_icon_barrierenfrei.svg"
+          title="Barrierefrei"
+        ></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button class="fab-action" aria-label="Kalender">
+        <ion-icon src="assets/lndw_icon_englisch.svg" title="English available"
+          >li</ion-icon
+        >
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

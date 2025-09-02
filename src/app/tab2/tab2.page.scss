@@ -131,3 +131,82 @@ ion-card-title {
   text-shadow: 0 0 4px rgba(0,0,0,0.3); /* leichter Schatten für bessere Sichtbarkeit */
 }
 
+/* Haupt-FAB (orange, rund) */
+ion-fab-button.fab-orange {
+  --background: #F6692C;
+  --background-hover: #f87f4f;
+  --background-activated: #ea6129;
+  --color: #ffffff;
+  --ripple-color: rgba(255,255,255,0.3);
+  --border-radius: 50%;
+  --box-shadow: none; /* vermeiden, wir setzen den Schatten am inneren Part */
+
+  transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
+}
+/* runder, weicher Schatten genau um die Rundung */
+ion-fab-button.fab-orange::part(native) {
+  border-radius: 50%;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.16),          /* Tiefe nach unten */
+    0 0 14px 8px rgba(246,105,44,0.10);    /* weicher Halo rundum */
+  -webkit-transform: translateZ(0);
+  will-change: box-shadow, transform;
+}
+ion-fab-button.fab-orange:hover::part(native) {
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.18),
+    0 0 16px 9px rgba(246,105,44,0.1);
+}
+ion-fab-button.fab-orange:active::part(native),
+ion-fab-button.fab-orange.ion-activated::part(native) {
+  transform: translateY(1px) scale(0.98);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.16),
+    0 0 12px 7px rgba(246,105,44,0.10);
+}
+ion-fab-button.fab-orange ion-icon { font-size: 28px; }
+
+/* Action-FABs (erscheinen darüber) */
+ion-fab-button.fab-action {
+  --background: #ffffff;
+  --color: #F6692C;
+  --ripple-color: rgba(246,105,44,0.15);
+  --border-radius: 50%;
+  --box-shadow: none;
+}
+ion-fab-button.fab-action::part(native) {
+  border: 1px solid rgba(246,105,44,0.28);
+  border-radius: 50%;
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.10),
+    0 0 10px 6px rgba(246,105,44,0.10);
+  -webkit-transform: translateZ(0);
+}
+ion-fab[activated] ion-fab-button.fab-action::part(native) {
+  /* optional: leichtes Pop-in bei aktiviertem Zustand */
+  animation: fab-pop 160ms ease;
+}
+@keyframes fab-pop {
+  from { transform: scale(0.9); opacity: 0.8; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* Badge-Icon (klein, oben/links am Rand des FAB) */
+ion-fab-button.fab-orange .fab-badge {
+  position: absolute;
+  top: -4px;            /* leicht über die Rundung hinaus */
+  left: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;  /* weißer Kreis hinter dem Icon */
+  color: #F6692C;       /* Icon orange */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;      /* Icon-Größe */
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.16),
+    0 0 10px 4px rgba(246,105,44,0.16);  /* weicher runder Halo */
+  pointer-events: none; /* nicht anklickbar */
+}
