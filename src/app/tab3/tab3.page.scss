@@ -1,0 +1,8 @@
+/* HEADER: wie Detailseite – Verlauf + weiße Schrift/Icons */
+ion-toolbar {
+  --background: linear-gradient(to right, #6748B1, #4B3991);
+  --color: #ffffff; /* wirkt auf Titel & Buttons */
+}
+ion-toolbar ion-title { color: #ffffff; }
+ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
+ion-toolbar ion-icon { color: #ffffff; }

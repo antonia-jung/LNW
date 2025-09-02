@@ -1,13 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Favoriten </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Favoriten</ion-title>
+      <!-- Links: Info-Icon -->
+      <ion-buttons slot="start">
+        <ion-button aria-label="Info">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-title>Meine Nacht</ion-title>
+
+      <!-- Rechts leer lassen (optional) -->
+      <ion-buttons slot="end"></ion-buttons>
     </ion-toolbar>
   </ion-header>
 

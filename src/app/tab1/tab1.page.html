@@ -1,15 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Start </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true" class="background-image">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Start</ion-title>
+      <!-- Links: Info-Icon -->
+      <ion-buttons slot="start">
+        <ion-button aria-label="Info">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-title>Wissen in Leipzig</ion-title>
+
+      <ion-buttons slot="end"></ion-buttons>
     </ion-toolbar>
   </ion-header>
-
+  <div class="title-container">
+    <h1>Lange Nacht der Wissenschaften in Leipzig</h1>
+    <div><img src="assets/skull.jpeg" alt="Logo" class="logo" /></div>
+    <div class="text">
+      <h2>Die nächste "Lange Nacht der Wissenschaften": 2027</h2>
+      <p>
+        Wer sich jetzt schon einstimmen will, kann sich noch einmal durch das
+        Programm von 2025 klicken und überlegen, welche neuen Erkenntnisse und
+        mögliche Nobelpreiträger:innen beim nächsten Mal dabei sind!
+      </p>
+    </div>
+  </div>
   <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>
