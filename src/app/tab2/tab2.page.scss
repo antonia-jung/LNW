@@ -1,48 +1,38 @@
-ion-card-header {
-  background-color: #f0f0f0;
+/* Grundfarben & Text */
+:host {
+  --lnw-lila: #4B3991;
+  --ion-text-color: var(--lnw-lila);
+  color: var(--ion-text-color);
 }
 
-ion-card-title,
-ion-card-subtitle {
-  color: #6748B1;
-}
-
-ion-card-title {
-  font-size: 1.5rem;
-}
-
-.platform-ios ion-card-title {
-  font-size: 0.5rem;
-}
-
-ion-content {
-  --background: #ffffff;
-}
-
-ion-card-content {
-  background-color: #ffffff;
-  color: #4B3991 !important;
-  padding: 1% 1% 1% 1%;
-}
-
+/* HEADER: wie Detailseite – Verlauf + weiße Schrift/Icons */
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
+  --color: #ffffff; /* wirkt auf Titel & Buttons */
+}
+ion-toolbar ion-title { color: #ffffff; }
+ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
+ion-toolbar ion-icon { color: #ffffff; }
+
+/* Content-Hintergrund & Standard-Textfarbe */
+ion-content {
+  --background: #ffffff;
+  color: var(--ion-text-color);
 }
 
-ion-tab-bar {
-  --background: #6748B1 !important;
-}
+/* Liste/Items */
+ion-item { --color: var(--ion-text-color); }
+ion-label, h1, h2, h3, h4, h5, h6, p, span { color: inherit; }
 
-.time {
-  font-size: 12px;
-  color: #4B3991;
-}
+/* Zeit-Icon in Karten */
+.time { font-size: 12px; color: var(--ion-text-color); }
 
+/* Meta-Icons + Format rechts */
 .meta-icons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-top: 8px;
 
   .left-icons {
     display: flex;
@@ -56,26 +46,88 @@ ion-tab-bar {
   }
 
   .format-text {
-    font-weight: bold;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-align: right;
     min-width: 80px;
+    color: var(--ion-text-color);
   }
 
   .divider {
-  margin: 0 6px;
-  color: #F6692C;
-  font-size: 14px;
-}
-}
-
-.group-header {
-  --background: #ffffff; // heller Hintergrund
-  padding: 12px 16px;
-
-  ion-label h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #F6692C; // passend zu deinem Farbschema
+    margin: 0 2px;
+    color: #F6692C;
+    font-size: 14px;
   }
 }
+
+/* Gruppen-Header (Uhrzeit-Zeile) */
+.group-header {
+  --background: #ffffff;
+  padding: 4px 4px;
+  border-bottom: 2px solid #E0E0E0; /* dezente Trennung */
+
+  ion-label h2 {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #F6692C; /* ggf. auf var(--ion-text-color) ändern */
+  }
+}
+
+/* ===== Karten ===== */
+
+/* Karte hell halten (auch im Dark Mode) + abgerundete Ecken für Header-Hintergrund */
+ion-card {
+  --background: #ffffff;
+  --color: var(--ion-text-color);
+  overflow: hidden; /* wichtig für runde Ecken am farbigen Header */
+
+  /* Asymmetrischer Schatten:
+     - erste Ebene: sehr subtil oben/links (negative Offsets)
+     - zweite Ebene: stärker rechts/unten (positive Offsets)
+  */
+  --box-shadow:
+    -1px -1px 4px rgba(0,0,0,0.18),
+     4px 4px 4px rgba(0,0,0,0.24);
+  box-shadow: var(--box-shadow);
+}
+
+/* >>> Karten-Kopf einfärben (Titel + Uhrzeit) */
+ion-card-header {
+  --background: #F5F3F5;   /* falls vom Web Component ausgewertet */
+  background: #F5F3F5;     /* Fallback/Sicherheit */
+}
+
+/* Texte im Kartenkopf weiterhin in Lila */
+ion-card-title,
+ion-card-subtitle {
+  color: var(--ion-text-color);
+}
+
+ion-card-subtitle {
+  font-size: 0.7rem;    /* etwas kleiner als Titel */
+  margin-bottom: 0.4rem;   /* Abstand zum Titel */
+}
+/* Karten-Inhalt (weiß) */
+ion-card-content {
+  background-color: #ffffff;
+  height: 1.8rem;
+}
+
+ion-card-title {
+  font-size: 0.95rem;      /* z.B. 16px – gern auf 0.95rem/0.9rem anpassen */
+  line-height: 1.25;    /* kompakter */
+  font-weight: 650;     /* etwas kräftiger, bleibt gut lesbar */
+  margin: 0;       
+       /* saubere Ausrichtung */
+}
+
+.fav-indicator {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  color: #F6692C; /* Orange, passend zu deinem Farbschema */
+  text-shadow: 0 0 4px rgba(0,0,0,0.3); /* leichter Schatten für bessere Sichtbarkeit */
+}
+

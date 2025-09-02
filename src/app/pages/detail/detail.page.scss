@@ -7,25 +7,12 @@
 
 /* HEADER: Verlauf + weiße Schrift/Icons */
 ion-toolbar {
-  /* Verlauf wie zuvor */
   --background: linear-gradient(to right, #6748B1, #4B3991);
-
-  /* WICHTIG: steuert Titel- & Button-Farbe im Toolbar */
   --color: #ffffff;
 }
-
-/* Falls einzelne Unterelemente trotzig sind: hart weiß erzwingen */
-ion-toolbar ion-title {
-  color: #ffffff;
-}
-ion-toolbar ion-button {
-  /* Ionic-Buttons respektieren --color, das hier doppelt absichern */
-  --color: #ffffff;
-  color: #ffffff;
-}
-ion-toolbar ion-icon {
-  color: #ffffff;
-}
+ion-toolbar ion-title { color: #ffffff; }
+ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
+ion-toolbar ion-icon { color: #ffffff; }
 
 /* Content (weißer Hintergrund, Text in Lilaton) */
 ion-content {
@@ -34,16 +21,12 @@ ion-content {
 }
 
 /* Items/Labels im Content */
-ion-item {
-  --color: var(--ion-text-color);
-}
+ion-item { --color: var(--ion-text-color); }
 ion-label,
 h1, h2, h3, h4, h5, h6,
-p, span {
-  color: inherit;
-}
+p, span { color: inherit; }
 
-/* (Optional) Detail-Titel größer lassen – falls gewünscht anpassen */
+/* Detail-Titel größer */
 ion-label h2 {
   margin: 0 0 6px 0;
   font-size: 1.4rem;
@@ -53,6 +36,50 @@ ion-label h2 {
 /* Abstand unter dem Infotext (Beschreibung im ersten Item) */
 ion-list > ion-item:first-of-type ion-label > div {
   display: block;
-  margin-bottom: 1%; /* ggf. 0.75rem, wenn du etwas mehr möchtest */
-  margin-top: 1%;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* ===== ZENTRIERTER BUTTON ALS OVERLAY ===== */
+.fav-center {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* exakte Mitte des Viewports */
+  z-index: 1000;
+
+  /* Damit du weiterhin scrollen/selektieren kannst */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* Events an Button weiterreichen, nicht an den Container */
+}
+
+.fav-center ion-button {
+  pointer-events: auto;
+}
+
+/* Button-Styling */
+.fav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 1.2rem;
+
+  min-width: 80%;
+  max-width: 90%;
+  height: 2.5rem;
+  font-size: 0.9rem;
+
+  /* FARBE */
+  --background: linear-gradient(to right, #6748B1, #4B3991); /* wie Header */
+  --color: #ffffff;
+  --ripple-color: rgba(255, 255, 255, 0.3);
+  --background-focused: #5b3f9f;
+  --background-activated: #5b3f9f;
+
+  --border-radius: 9999px;
+
+ 
 }

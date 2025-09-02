@@ -1,13 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Programm</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Programm</ion-title>
+      <!-- Links: Info-Icon -->
+      <ion-buttons slot="start">
+        <ion-button aria-label="Info">
+          <ion-icon name="information-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-title>Komplettes Programm</ion-title>
+
+      <!-- Rechts leer lassen (optional) -->
+      <ion-buttons slot="end"></ion-buttons>
     </ion-toolbar>
   </ion-header>
 
@@ -32,27 +36,24 @@
           {{ item.beginn }} – {{ item.ende }}
         </ion-card-subtitle>
 
-        <!-- Favoriten-Button rechts im Header -->
-        <ion-buttons slot="end">
-          <ion-button
-            fill="clear"
-            (click)="getdata.toogleFavorit(item.id, item.termin_id)"
-            [attr.aria-label]="getdata.isFavorit(item.id, item.termin_id) ? 'Aus Favoriten entfernen' : 'Zu Favoriten hinzufügen'"
-          >
-            <ion-icon
-              [name]="getdata.isFavorit(item.id, item.termin_id) ? 'heart' : 'heart-outline'"
-            >
-            </ion-icon>
-          </ion-button>
-        </ion-buttons>
+        <!-- Favoriten-Indikator (nur Anzeige, kein Button) -->
+        <ion-icon
+          class="fav-indicator"
+          name="heart"
+          *ngIf="getdata.isFavorit(item.id, item.termin_id)"
+          aria-hidden="true"
+        >
+        </ion-icon>
       </ion-card-header>
 
       <ion-card-content>
         <div class="meta-icons">
           <div class="left-icons">
             <ng-container *ngIf="item.kinder">
-              <ion-icon src="assets/lndw_icon_kids.svg" title="Kinder geeignet">
-              </ion-icon>
+              <ion-icon
+                src="assets/lndw_icon_kids.svg"
+                title="Kinder geeignet"
+              ></ion-icon>
               <span class="divider" *ngIf="(item.barrierefrei || item.english)"
                 >|</span
               >
@@ -62,8 +63,7 @@
               <ion-icon
                 src="assets/lndw_icon_barrierenfrei.svg"
                 title="Barrierefrei"
-              >
-              </ion-icon>
+              ></ion-icon>
               <span class="divider" *ngIf="item.english">|</span>
             </ng-container>
 
@@ -71,8 +71,7 @@
               <ion-icon
                 src="assets/lndw_icon_englisch.svg"
                 title="English available"
-              >
-              </ion-icon>
+              ></ion-icon>
             </ng-container>
           </div>
 
