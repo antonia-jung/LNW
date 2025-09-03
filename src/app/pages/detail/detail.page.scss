@@ -1,7 +1,11 @@
 /* Farben & Grundtext auf der Seite */
 :host {
   --lnw-lila: #6748B1;
+
+  /* Wichtig: auf Komponenten-Ebene das helle Ionic-Schema setzen */
   --ion-text-color: var(--lnw-lila);
+  --ion-background-color: #ffffff;      /* globale Page-Var */
+  --ion-item-background: #ffffff;       /* Items hell */
   color: var(--ion-text-color);
 }
 
@@ -14,14 +18,23 @@ ion-toolbar ion-title { color: #ffffff; }
 ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
 ion-toolbar ion-icon { color: #ffffff; }
 
-/* Content (weißer Hintergrund, Text in Lilaton) */
+/* Content hell */
 ion-content {
-  --background: #ffffff;
+  --background: #ffffff; /* wichtig: Variable, die ins Shadow DOM durchreicht */
   color: var(--ion-text-color);
 }
 
-/* Items/Labels im Content */
-ion-item { --color: var(--ion-text-color); }
+/* LISTE/ITEMS — hier liegt dein „schwarzes“ Problem */
+ion-list {
+  background: transparent !important;
+  --background: transparent !important;
+}
+
+ion-item {
+  --background: #ffffff !important;
+  --color: var(--lnw-lila) !important;
+}
+
 ion-label,
 h1, h2, h3, h4, h5, h6,
 p, span { color: inherit; }
@@ -45,19 +58,14 @@ ion-list > ion-item:first-of-type ion-label > div {
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%); /* exakte Mitte des Viewports */
+  transform: translate(-50%, -50%);
   z-index: 1000;
-
-  /* Damit du weiterhin scrollen/selektieren kannst */
   width: 100%;
   display: flex;
   justify-content: center;
-  pointer-events: none; /* Events an Button weiterreichen, nicht an den Container */
+  pointer-events: none;
 }
-
-.fav-center ion-button {
-  pointer-events: auto;
-}
+.fav-center ion-button { pointer-events: auto; }
 
 /* Button-Styling */
 .fav-button {
@@ -72,18 +80,40 @@ ion-list > ion-item:first-of-type ion-label > div {
   height: 2.5rem;
   font-size: 0.9rem;
 
-  /* FARBE */
-  --background: linear-gradient(to right, #6748B1, #4B3991); /* wie Header */
+  --background: linear-gradient(to right, #6748B1, #4B3991);
   --color: #ffffff;
   --ripple-color: rgba(255, 255, 255, 0.3);
   --background-focused: #5b3f9f;
   --background-activated: #5b3f9f;
-
   --border-radius: 9999px;
-
- 
 }
 
-.tag {
-  color: #F6692C
+.tag { color: #F6692C; }
+
+/* =========================
+   Optional NUR Desktop hell erzwingen
+   (falls du mobile anders willst)
+   ========================= */
+@media (min-width: 992px) {
+  :host {
+    color-scheme: light; /* signalisiert „hell“ */
+  }
+  ion-content { --background: #ffffff !important; }
+  ion-list { --background: transparent !important; }
+  ion-item {
+    --background: #ffffff !important;
+    --color: var(--lnw-lila) !important;
+  }
+}
+
+/* Ionicons mit name=… direkt lila einfärben */
+ion-item ion-icon[name] {
+  color: var(--lnw-lila) !important;
+}
+
+/* Externe SVGs (src=assets/…) sichtbar machen:
+   Variante 1: Lila (#6748B1) */
+ion-item ion-icon[src^="assets/"]:not(.tag) {
+  filter: brightness(0) saturate(100%) invert(20%) sepia(26%) saturate(2061%)
+          hue-rotate(230deg) brightness(88%) contrast(94%);
 }

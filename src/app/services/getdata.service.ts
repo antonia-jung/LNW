@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import CordovaSQLiteDriver from 'localforage-cordovasqlitedriver';
+import { FavoritesCounterService } from './favorites-counter.service';
 
 // ----------------------
 // Datentypen / Interfaces
@@ -49,7 +50,10 @@ export class GetdataService {
   favoriten: Favorit[] = [];
   favoritesYear = '';
 
-  constructor(private storage: Storage) {
+  constructor(
+    private storage: Storage,
+    private favCounter: FavoritesCounterService
+  ) {
     this.init().then(() => {
       this.loadData().then(() => {
         // Zeiten formatieren
@@ -82,6 +86,9 @@ export class GetdataService {
     // Persistente Werte laden (Fallback, falls Key noch nicht existiert)
     this.favoriten = (await this.storage.get('favoriten')) || [];
     this.favoritesYear = (await this.storage.get('favoritesYear')) || '';
+
+    // ---> Badge beim Start korrekt setzen (ohne auf data warten zu müssen)
+    this.favCounter.set(this.favoriten.length);
   }
 
   // ----------------------
@@ -139,10 +146,15 @@ export class GetdataService {
     } else {
       this.favoriten.push({ id, termin_id });
     }
+
+    // Persistieren
     await this.storage.set('favoriten', this.favoriten);
+
+    // ---> Badge nach jeder Änderung aktualisieren
+    this.favCounter.set(this.favoriten.length);
   }
 
-  /** NEU: Liste der favorisierten Einträge (robust, falls data leer) */
+  /** Liste der favorisierten Einträge (robust, falls data leer) */
   getFavoritenEntries(): EintragData[] {
     if (!this.data?.length || !this.favoriten?.length) return [];
     const favSet = new Set(
@@ -151,27 +163,24 @@ export class GetdataService {
     return this.data.filter((e) => favSet.has(`${e.id}::${e.termin_id}`));
   }
 
-  /** NEU: Anzahl der Favoriten (praktisch für Badge/Überschrift) */
+  /** Anzahl der Favoriten (falls du es irgendwo direkt brauchst) */
   getFavoritenCount(): number {
-    return this.getFavoritenEntries().length;
+    return this.favoriten.length;
   }
 
   // ----------------------
   // CRUD-Beispiele: favoritesYear
   // ----------------------
-  /** favoritesYear im Storage speichern */
   async saveFavoritesYear(value: string) {
     this.favoritesYear = value;
     await this.storage.set('favoritesYear', value);
   }
 
-  /** favoritesYear aus dem Storage laden (mit Fallback "") */
   async loadFavoritesYear() {
     this.favoritesYear = (await this.storage.get('favoritesYear')) || '';
     return this.favoritesYear;
   }
 
-  /** favoritesYear löschen */
   async clearFavoritesYear() {
     this.favoritesYear = '';
     await this.storage.remove('favoritesYear');
