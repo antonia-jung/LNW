@@ -66,10 +66,10 @@
             name="business-outline"
             aria-hidden="true"
           ></ion-icon>
-          <ion-label> {{ entry()!.einrichtung }} </ion-label>
+          <ion-label>{{ entry()!.einrichtung }}</ion-label>
         </ion-item>
 
-        <!-- Format (mit HTML möglich) -->
+        <!-- Format (mit HTML möglich) — bleibt unverändert -->
         <ion-item *ngIf="entry()?.format">
           <ion-icon
             slot="start"
@@ -88,7 +88,41 @@
             name="pricetag-outline"
             aria-hidden="true"
           ></ion-icon>
-          <ion-label> {{ entry()!.themen }} </ion-label>
+          <ion-label>{{ entry()!.themen }}</ion-label>
+        </ion-item>
+
+        <!-- Merkmale als eigene Zeilen (Icon + Text) -->
+        <ion-item *ngIf="entry()?.kinder">
+          <ion-icon
+            slot="start"
+            src="assets/lndw_icon_kids.svg"
+            title="Kinder geeignet"
+            aria-label="Kinder geeignet"
+            class="tag"
+          ></ion-icon>
+          <ion-label class="tag">Kinder geeignet</ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="entry()?.barrierefrei">
+          <ion-icon
+            slot="start"
+            src="assets/lndw_icon_barrierenfrei.svg"
+            title="Barrierefrei"
+            aria-label="Barrierefrei"
+            class="tag"
+          ></ion-icon>
+          <ion-label class="tag">Barrierefrei</ion-label>
+        </ion-item>
+
+        <ion-item *ngIf="entry()?.english">
+          <ion-icon
+            slot="start"
+            src="assets/lndw_icon_englisch.svg"
+            title="English available"
+            aria-label="Englisch verfügbar"
+            class="tag"
+          ></ion-icon>
+          <ion-label class="tag">Englisch verfügbar</ion-label>
         </ion-item>
 
         <!-- Großer Favoriten-Button -->

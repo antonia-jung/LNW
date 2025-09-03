@@ -1,19 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Links: Info-Icon führt zum Impressum -->
+    <ion-buttons slot="start">
+      <ion-button aria-label="Info" (click)="goImpressum()">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Meine Nacht</ion-title>
+
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
-      <!-- Links: Info-Icon -->
-      <ion-buttons slot="start">
-        <ion-button aria-label="Info" (click)="goImpressum()">
-          <ion-icon name="information-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+  <!-- Gruppen nach Uhrzeit (wie in Tab 2) -->
+  <ng-container *ngIf="getGroupedFavoriten().length; else empty">
+    <ng-container *ngFor="let group of getGroupedFavoriten()">
+      <!-- Überschrift für Uhrzeit -->
+      <ion-item lines="none" class="group-header">
+        <ion-label>
+          <h2>{{ group.time.replace(':', '.') }} Uhr</h2>
+        </ion-label>
+      </ion-item>
 
-      <ion-title>Meine Nacht</ion-title>
+      <!-- Karten für diese Uhrzeit -->
+      <ion-card
+        *ngFor="let item of group.items; trackBy: trackById"
+        (click)="openDetail(item)"
+      >
+        <ion-card-header>
+          <ion-card-title>{{ item.titel }}</ion-card-title>
+          <ion-card-subtitle *ngIf="item.beginn || item.ende">
+            <ion-icon
+              class="time"
+              name="time-outline"
+              aria-hidden="true"
+            ></ion-icon>
+            {{ formatTime(item.beginn) }}<ng-container *ngIf="item.ende">
+              &nbsp;–&nbsp;{{ formatTime(item.ende) }}
+            </ng-container>
+          </ion-card-subtitle>
 
-      <!-- Rechts leer lassen (optional) -->
-      <ion-buttons slot="end"></ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+          <!-- Favoriten-Indikator (nur Anzeige, kein Button) -->
+          <ion-icon
+            class="fav-indicator"
+            name="heart"
+            *ngIf="getdata.isFavorit(item.id, item.termin_id)"
+            aria-hidden="true"
+          ></ion-icon>
+        </ion-card-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+        <ion-card-content>
+          <!-- Meta-Icons + Format wie in Tab 2 -->
+          <div class="meta-icons">
+            <div class="left-icons">
+              <ng-container *ngIf="item.kinder">
+                <ion-icon
+                  src="assets/lndw_icon_kids.svg"
+                  title="Kinder geeignet"
+                  aria-label="Kinder geeignet"
+                ></ion-icon>
+                <span
+                  class="divider"
+                  *ngIf="(item.barrierefrei || item.english)"
+                  >|</span
+                >
+              </ng-container>
+
+              <ng-container *ngIf="item.barrierefrei">
+                <ion-icon
+                  src="assets/lndw_icon_barrierenfrei.svg"
+                  title="Barrierefrei"
+                  aria-label="Barrierefrei"
+                ></ion-icon>
+                <span class="divider" *ngIf="item.english">|</span>
+              </ng-container>
+
+              <ng-container *ngIf="item.english">
+                <ion-icon
+                  src="assets/lndw_icon_englisch.svg"
+                  title="English available"
+                  aria-label="Englisch verfügbar"
+                ></ion-icon>
+              </ng-container>
+            </div>
+
+            <span
+              class="format-text"
+              *ngIf="item.format"
+              [innerHTML]="item.format"
+            ></span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+
+  <!-- Leerzustand -->
+  <ng-template #empty>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>Keine Favoriten gespeichert</h2>
+        <p>
+          Tippe im Programm auf das Herz, um Beiträge zu „Meine Nacht“
+          hinzuzufügen.
+        </p>
+      </ion-label>
+    </ion-item>
+  </ng-template>
 </ion-content>

@@ -68,21 +68,6 @@ export class GetdataService {
 
         // Kompletten Datensatz optional im Storage ablegen
         this.storage.set('data', this.data);
-
-        // ---------- TEST: Favoriten nach dem Laden ----------
-        if (this.data.length > 0) {
-          const first = this.data[0];
-          this.toogleFavorit(first.id, first.termin_id).then(() => {
-            console.log('Favoriten:', this.favoriten);
-            console.log(
-              'isFavorit (1. Eintrag):',
-              this.isFavorit(first.id, first.termin_id)
-            );
-          });
-        } else {
-          console.warn('Keine Daten geladen – Favoriten-Test übersprungen.');
-        }
-        // ----------------------------------------------------
       });
     });
   }
@@ -155,6 +140,20 @@ export class GetdataService {
       this.favoriten.push({ id, termin_id });
     }
     await this.storage.set('favoriten', this.favoriten);
+  }
+
+  /** NEU: Liste der favorisierten Einträge (robust, falls data leer) */
+  getFavoritenEntries(): EintragData[] {
+    if (!this.data?.length || !this.favoriten?.length) return [];
+    const favSet = new Set(
+      this.favoriten.map((f) => `${f.id}::${f.termin_id}`)
+    );
+    return this.data.filter((e) => favSet.has(`${e.id}::${e.termin_id}`));
+  }
+
+  /** NEU: Anzahl der Favoriten (praktisch für Badge/Überschrift) */
+  getFavoritenCount(): number {
+    return this.getFavoritenEntries().length;
   }
 
   // ----------------------
