@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- Zurück-Button -->
-      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+      <!-- Zurück-Button nur mit Icon -->
+      <ion-back-button defaultHref="/tabs/tab1" text=""></ion-back-button>
     </ion-buttons>
 
     <ion-title>Wissen in Leipzig</ion-title>
@@ -13,11 +13,416 @@
 
 <ion-content [fullscreen]="true">
   <div class="title-container">
-    <h1>Lange Nacht der Wissenschaften in Leipzig</h1>
-
-    <div class="text">
-      <h2>Die nächste "Lange Nacht der Wissenschaften": 2027</h2>
-      <p>Test</p>
-    </div>
+    <h1>Infos & Rechtliches</h1>
   </div>
+
+  <ion-accordion-group expand="inset">
+    <!-- Impressum -->
+    <ion-accordion value="impressum">
+      <ion-item slot="header" button>
+        <ion-label>Impressum</ion-label>
+      </ion-item>
+      <div class="accordion-content" slot="content">
+        <p>
+          Bitte beachten Sie, dass die folgenden Angaben Pflichtangaben zum
+          Betrieb der Webseite nach dem Telemediengesetz darstellen. Es handelt
+          sich nicht um die zentralen Kontaktadressen der Stadtverwaltung.
+        </p>
+
+        <p>
+          Die Lange Nacht der Wissenschaften wird von den Leipziger Hochschulen
+          und Forschungseinrichtungen gemeinsam mit der Stadt Leipzig und dem
+          Leipzig Science Network e. V. organisiert und umgesetzt. Die
+          Gesamtkoordination der Veranstaltung übernimmt das Referat
+          Wissenspolitik der Stadt Leipzig in enger Abstimmung mit den
+          beteiligten Institutionen.
+        </p>
+
+        <h2>Herausgeber</h2>
+        <address>
+          Stadt Leipzig<br />
+          Der Oberbürgermeister<br />
+          Martin-Luther-Ring 4-6<br />
+          04109 Leipzig<br />
+          Körperschaft des öffentlichen Rechts<br />
+          Umsatzsteueridentifikationsnummer DE 141510203
+        </address>
+
+        <h2>Redaktionelle Verantwortung</h2>
+        <address>
+          Stadt Leipzig<br />
+          Der Oberbürgermeister<br />
+          Referat Wissenspolitik<br />
+          Martin-Luther-Ring 4–6<br />
+          04109 Leipzig<br />
+          Telefon: <a href="tel:+493411232014">0341&nbsp;123-2014</a><br />
+          E-Mail:
+          <a href="mailto:wissenschaft@leipzig.de"
+            >wissenschaft&#64;leipzig.de</a
+          >
+        </address>
+
+        <h2>Inhaber der Domain</h2>
+        <address>
+          HHL Leipzig Graduate School of Management<br />
+          Jahnallee 59<br />
+          04109 Leipzig<br />
+          E-Mail: <a href="mailto:media@hhl.de">media&#64;hhl.de</a>
+        </address>
+
+        <h2>Konzept und Gestaltung</h2>
+        <address>
+          FZEY GmbH<br />
+          Weinbergsweg 3<br />
+          10119 Berlin<br />
+          <a href="https://www.fzey.de/" target="_blank" rel="noopener"
+            >https://www.fzey.de/</a
+          >
+        </address>
+
+        <h2>Gestaltung und Programmierung ab 2025</h2>
+        <address>
+          KOCMOC brand GmbH<br />
+          Marienplatz 1<br />
+          04103 Leipzig<br />
+          <a href="https://kocmocbrand.de/" target="_blank" rel="noopener"
+            >https://kocmocbrand.de/</a
+          >
+        </address>
+
+        <h2>Haftungshinweis</h2>
+        <p>
+          Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung
+          für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten
+          sind ausschließlich deren Betreiber verantwortlich. Unter Umständen
+          werden auf dieser Webseite eingetragene Marken, Handelsnamen, Signets
+          verwendet. Auch wenn diese an den jeweiligen Stellen nicht als solche
+          gekennzeichnet sind, gelten die entsprechenden gesetzlichen
+          Bestimmungen und die Rechte der jeweiligen Eigentümer.
+        </p>
+
+        <h2>Regeln für Links, die auf wissen-in-leipzig.de verweisen</h2>
+        <p>
+          Links auf die Webseite der Langen Nacht der Wissenschaften Leipzig
+          müssen zu einem vollständig neuen Laden der Seite, auf die verwiesen
+          wird, führen. Der Inhalt verlinkter Seiten darf nicht als Teil anderer
+          Seiten eingebunden werden.
+        </p>
+        <p>
+          Wenn für die Verlinkung ein grafisches Element der Langen Nacht der
+          Wissenschaften Leipzig zur Verfügung gestellt wurde, ist es nicht
+          gestattet, daran Veränderungen vorzunehmen oder dieses anderweitig zu
+          verwenden. Fragen zur Verwendung von grafischen Elementen der Langen
+          Nacht der Wissenschaften richten Sie bitte an:
+          <a href="mailto:wissenschaft@leipzig.de"
+            >wissenschaft&#64;leipzig.de</a
+          >.
+        </p>
+        <p>
+          Für Internet-Seiten mit illegalen, anstößigen, irreführenden,
+          diffamierenden oder nicht jugendfreien Inhalten ist eine Verlinkung
+          nicht erlaubt.
+        </p>
+      </div>
+    </ion-accordion>
+
+    <!-- Datenschutz -->
+    <ion-accordion value="datenschutz">
+      <ion-item slot="header" button>
+        <ion-label>Datenschutz</ion-label>
+      </ion-item>
+      <div class="accordion-content" slot="content">
+        <h2>Name und Anschrift des Verantwortlichen</h2>
+        <address>
+          Stadt Leipzig<br />
+          Der Oberbürgermeister<br />
+          Martin-Luther-Ring 4-6<br />
+          04109 Leipzig<br />
+          Telefon: <a href="tel:+49341123">0341&nbsp;123</a><br />
+          E-Mail: <a href="mailto:info@leipzig.de">info&#64;leipzig.de</a> oder
+          <a href="mailto:info@leipzig.de-mail.de"
+            >info&#64;leipzig.de-mail.de</a
+          >
+        </address>
+
+        <h2>Ansprechpartner beim Verantwortlichen</h2>
+        <address>
+          Stadt Leipzig<br />
+          Referat Wissenspolitik<br />
+          04092 Leipzig<br />
+          Telefon: <a href="tel:+493411232015">0341&nbsp;123-2015</a><br />
+          E-Mail: <a href="mailto:wissen@leipzig.de">wissen&#64;leipzig.de</a>
+        </address>
+
+        <h2>Name und Anschrift des Datenschutzbeauftragten</h2>
+        <address>
+          Stadt Leipzig<br />
+          Datenschutzbeauftragter<br />
+          04092 Leipzig<br />
+          Telefon: <a href="tel:+493411232247">0341&nbsp;123-2247</a><br />
+          E-Mail:
+          <a href="mailto:datenschutzbeauftragter@leipzig.de"
+            >datenschutzbeauftragter&#64;leipzig.de</a
+          >
+        </address>
+
+        <h2>
+          Informationen zur Datenverarbeitung beim Besuch unserer Webseite
+        </h2>
+        <p>
+          Bei jedem Zugriff auf unser Internetangebot werden durch den von Ihnen
+          genutzten Browser Daten an unseren Webserver übertragen. Diese Daten
+          beinhalten unter anderem:
+        </p>
+        <ul>
+          <li>übermittelte Eingabewerte</li>
+          <li>übertragene Datenmenge</li>
+          <li>verwendeter Webbrowser und verwendetes Betriebssystem</li>
+          <li>Referrer URL (zuvor besuchte Seite)</li>
+          <li>Datum und Uhrzeit des Abrufs</li>
+          <li>IP-Adresse des abrufenden Gerätes</li>
+        </ul>
+
+        <p>
+          Aus Gründen der technischen Sicherheit, insbesondere zur Abwehr von
+          Angriffsversuchen auf unseren Webserver, werden folgende Daten für 30
+          Tage gespeichert und anschließend anonymisiert bzw. gelöscht:
+        </p>
+        <ul>
+          <li>verwendeter Webbrowser und verwendetes Betriebssystem</li>
+          <li>IP-Adresse des abrufenden Gerätes</li>
+          <li>Internet-Service-Provider der Nutzerin/des Nutzers</li>
+          <li>Datum und Uhrzeit des Abrufs</li>
+        </ul>
+
+        <p>
+          Solange und soweit dies zur Verfolgung von Angriffen und Störungen
+          erforderlich ist, erfolgt eine längere Speicherung bis zum Abschluss
+          des jeweiligen Verfahrens. In anonymisierter Form werden die Daten
+          daneben zu statistischen Zwecken verarbeitet. Ein Abgleich mit anderen
+          Datenbeständen und eine Weitergabe an Dritte erfolgt nicht.
+        </p>
+
+        <p>
+          Rechtsgrundlage für diese Verarbeitung ist Artikel 6 Absatz 1
+          Buchstabe e DSGVO in Verbindung mit §&nbsp;4 Sächsisches
+          Informationssicherheitsgesetz und §&nbsp;3 Sächsisches
+          Datenschutzdurchführungsgesetz. Wir werden nur bei rechtswidrigen
+          Angriffen versuchen herauszufinden, welche Person hinter einer
+          IP-Adresse steht.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          Im Rahmen des für die Bereitstellung des Angebots genutzten Content
+          Management Systems wird ein sogenanntes „Session-Cookie“ genutzt.
+          Dieses ist erforderlich, um bestimmte Inhalte in der gewünschten Art
+          und Weise bereitzustellen. Das Session-Cookie enthält eine sogenannte
+          Session-ID und verfällt mit Ablauf der Sitzung, bspw. wenn Sie Ihren
+          Browser schließen.
+        </p>
+        <p>
+          Unter dem Menüpunkt „Meine Nacht“ können Sie die für Sie interessanten
+          Beiträge im Programm sammeln. Diese Funktion benötigt ein Cookie.
+          Dieses Cookie enthält eine eindeutige ID und ist bis drei Tage nach
+          Ende der Veranstaltung gültig.
+        </p>
+        <p>
+          Rechtsgrundlage für diese Datenverarbeitung ist Artikel 6 Absatz 1
+          Buchstabe e DSGVO in Verbindung mit §&nbsp;3 Sächsisches
+          Datenschutzdurchführungsgesetz im Rahmen der Öffentlichkeitsarbeit zur
+          bedarfsorientierten Bereitstellung von Informationen.
+        </p>
+        <p>
+          Die meisten Browser sind so eingestellt, dass sie Cookies automatisch
+          akzeptieren. Das Speichern von Cookies kann jedoch deaktiviert bzw.
+          der Browser so eingestellt werden, dass Cookies nur für die Dauer der
+          jeweiligen Verbindung zum Internet gespeichert werden. Wir weisen Sie
+          darauf hin, dass Sie dann eventuell nicht alle Funktionen dieser
+          Webseite nutzen können, insbesondere Funktionen von „Meine Nacht“.
+          Dies bedeutet, dass Sie sich keine Einzelveranstaltungen auf den
+          „Meine Nacht“-Merkzettel legen können.
+        </p>
+
+        <h2>
+          Externe Links, Soziale Medien, Dienste Dritter (insbesondere Videos)
+        </h2>
+        <p>
+          Unsere Internetseite bindet sogenannte Links zu Facebook (Facebook
+          Ireland Ltd., 4 Grand Canal Square, Grand Canal Harbour, Dublin 2,
+          Irland), Twitter (Twitter International Company, One Cumberland Place,
+          Fenian Street, Dublin 2, D02 AX07, Irland), Instagram (Facebook
+          Ireland Ltd., 4 Grand Canal Square, Grand Canal Harbour, Dublin 2,
+          Irland) und LinkedIn (LinkedIn Corporation, ATTN: Copyright Agent,
+          Legal Department, 1000 West Maude Avenue, Sunnyvale, CA 94085 USA)
+          ein. Die Links erkennen Sie an den jeweiligen Symbolen (Logos) der
+          Diensteanbieter. Durch die eingebundenen Links werden keine Daten
+          übertragen. Nach Aufruf eines Links werden Sie auf die Seiten des
+          Social-Media-Anbieters weitergeleitet.
+        </p>
+        <p>
+          Auf unserer Seite werden inhaltliche Programmbeiträge der
+          Wissenschaftseinrichtungen, die an der Langen Nacht der Wissenschaften
+          teilnehmen, eingebunden. Dies erfolgt durch Einbettung von Videos oder
+          in Form von externen Links.
+        </p>
+        <p>
+          Bei eingebetteten Videos erfolgt eine Datenübertragung an den
+          jeweiligen Diensteanbieter erst, wenn Sie der Nutzung des Dienstes
+          durch dessen Aktivierung zustimmen. Für die Aktivierung verwenden wir
+          eine individuelle Zwei-Klick-Lösung, die die eigentlichen Fremdinhalte
+          erst anzeigt, wenn Sie Ihre Zustimmung über den Klick eines Buttons
+          geben. Bis zu diesem Zeitpunkt findet kein Datenverkehr mit den
+          Diensteanbietern statt. Mit dem Aufruf werden u.&nbsp;a. Ihre
+          IP-Adresse und der Referrer (URL unserer Webseite, über die Sie den
+          Dienst aufgerufen haben) übertragen. Inwiefern die Diensteanbieter
+          Daten für eigene Zwecke erheben und auswerten, kann von uns nicht
+          beeinflusst werden. Zweck und Umfang der Datenerhebung durch die
+          Diensteanbieter, sowie die dortige weitere Verarbeitung Ihrer Daten
+          wie auch Ihre diesbezüglichen Rechte und Einstellungsmöglichkeiten zum
+          Schutz Ihrer Privatsphäre entnehmen Sie bitte den
+          Datenschutzinformationen der Diensteanbieter (s.&nbsp;u.).
+        </p>
+        <p>
+          Bitte beachten Sie, dass bei der Nutzung eingebetteter Videos auch
+          personenbezogene Daten in die USA und damit ein Drittland übertragen
+          werden können. In Drittländern herrscht in der Regel kein
+          vergleichbares Datenschutzniveau. Teilweise können dortige Behörden
+          ohne Kenntnis der betroffenen Person auf personenbezogene Daten
+          zugreifen, ohne dass hiergegen Rechtsschutzmöglichkeiten oder
+          durchsetzbare Rechte bestehen.
+        </p>
+        <p>
+          Durch Erteilung Ihrer Einwilligung in den Aufruf eingebetteter Videos
+          erklären Sie sich ausdrücklich mit der Datenübermittlung in
+          Drittländer einverstanden.
+        </p>
+        <p>
+          Wenn Sie eine solche Datenübermittlung und die damit verbundene
+          Datenverarbeitung durch den Diensteanbieter – insbesondere den Einsatz
+          von Cookies oder anderen Formen der lokalen Speicherung oder des
+          Trackings – nicht wünschen, klicken Sie eingebettete Videos bitte
+          nicht an. Beachten Sie bitte auch die nachfolgenden Informationen zu
+          eingesetzten Videodiensten.
+        </p>
+
+        <h3>YouTube</h3>
+        <p>
+          YouTube-Videos, die von unserer Webseite aus abspielbar sind, binden
+          wir darüber hinaus im „erweiterten Datenschutz-Modus“ ein. Dieser
+          Modus bewirkt laut YouTube, dass YouTube keine Informationen über die
+          Besucherinnen und Besucher auf dieser Webseite zur Personalisierung
+          des Surfens oder zur Personalisierung von Anzeigen oder Werbung
+          verwendet werden, die einer Nutzerin oder einem Nutzer außerhalb der
+          aufgerufenen Internetseite angezeigt werden. Im erweiterten
+          Datenschutzmodus werden keine YouTube-Cookies gesetzt, bis das Video
+          abgespielt wird. Nach Starten eines Videos kann YouTube verschiedene
+          Cookies auf Ihrem Endgerät speichern und Datenverarbeitungen für
+          eigenen Zwecke durchführen, auf die wir keinen Einfluss haben.
+        </p>
+        <p>
+          Wenn Sie ein Benutzerkonto bei YouTube besitzen und dort eingeloggt
+          sind, ermöglichen Sie YouTube, Ihr Surfverhalten direkt Ihrem
+          persönlichen Profil zuzuordnen. Dies können Sie verhindern, indem Sie
+          sich aus Ihrem Benutzerkonto abmelden.
+        </p>
+        <p>
+          YouTube-API-Dienste werden durch YouTube LLC, USA zur Verfügung
+          gestellt, die in 901 Cherry Ave, San Bruno CA 94066 ansässig ist. Im
+          Übrigen ist die Google Ireland Limited, Gordon House, Barrow Street,
+          Dublin 4, Irland verantwortlicher Betreiber. Weitere Informationen zum
+          Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von
+          YouTube unter
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener"
+            >policies.google.com/privacy</a
+          >. Näheres zur Cookie-Verwendung durch YouTube finden Sie in der
+          Cookie Policy von Google unter
+          <a
+            href="https://policies.google.com/technologies/types?hl=de"
+            target="_blank"
+            rel="noopener"
+            >policies.google.com/technologies/types?hl=de</a
+          >.
+        </p>
+
+        <h3>Vimeo</h3>
+        <p>
+          Bei der Einbettung von Vimeo-Videos nutzen wir den sogenannten
+          „Do-Not-Track-Modus“. Dieser bewirkt laut Vimeo, dass der Videoplayer
+          keine Sitzungsdaten, einschließlich aller Cookies und Statistiken,
+          verfolgen kann. Anbieter des Videoportals ist Vimeo LLC, 555 West 18th
+          Street, New York, New York 10011, USA.
+        </p>
+        <p>
+          Wenn Sie ein Benutzerkonto bei Vimeo besitzen und dort eingeloggt
+          sind, ordnet Vimeo Informationen zu Ihren Aktivitäten Ihrem
+          Benutzerkonto zu. Dies können Sie verhindern, indem Sie sich aus Ihrem
+          Benutzerkonto abmelden.
+        </p>
+        <p>
+          Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der
+          Datenschutzerklärung von Vimeo unter:
+          <a href="https://vimeo.com/privacy" target="_blank" rel="noopener"
+            >vimeo.com/privacy</a
+          >.
+        </p>
+
+        <h2>Benachrichtigungs-Service</h2>
+        <p>
+          Werden Web-Push-Benachrichtigungen aktiviert, wird zur Bereitstellung
+          dieser Funktion ein Service des jeweiligen Browsers eingesetzt. Für
+          den Versand von Web-Push-Nachrichten werden ausschließlich anonyme
+          bzw. pseudonyme Daten übertragen. Sie können dem Empfang von
+          Benachrichtigungen jederzeit über die Einstellungen Ihres Browsers
+          widersprechen.
+        </p>
+        <p>
+          Informationen über die Abmeldung für Web-Push-Benachrichtigungen für
+          die jeweiligen Browser finden Sie u.&nbsp;a. bei: Google Chrome,
+          Mozilla Firefox, Apple Safari.
+        </p>
+
+        <h2>Rechte der betroffenen Person</h2>
+        <p>
+          Ihnen stehen bei Vorliegen der gesetzlichen Voraussetzungen die in den
+          Artikeln 15 bis 18 und 20 bis 21 DSGVO genannten Rechte zu,
+          insbesondere das Recht auf Auskunft (Artikel 15 DSGVO), das Recht auf
+          Berichtigung, auf Löschung sowie auf Einschränkung der Verarbeitung
+          (Artikel 16 bis 18 DSGVO), das Recht auf Datenübertragbarkeit (Artikel
+          20 DSGVO) und das Recht auf Widerspruch (Artikel 21 DSGVO).
+        </p>
+        <p>
+          Sofern die Verarbeitung Ihrer personenbezogenen Daten auf Ihrer
+          Einwilligung beruht, können Sie die erteilte Einwilligung jederzeit
+          mit Wirkung für die Zukunft widerrufen. Die Rechtmäßigkeit der
+          aufgrund der Einwilligung bis zum Widerruf erfolgten Datenverarbeitung
+          wird durch den Widerruf nicht berührt.
+        </p>
+        <p>
+          Sie haben nach Artikel 77 DSGVO außerdem das Recht, sich bei der
+          Aufsichtsbehörde zu beschweren, wenn Sie der Ansicht sind, dass die
+          Verarbeitung der Sie betreffenden personenbezogenen Daten gegen
+          Datenschutzvorschriften verstößt. Im Freistaat Sachsen können Sie sich
+          an den Sächsischen Datenschutzbeauftragten wenden (<a
+            href="https://www.saechsdsb.de"
+            target="_blank"
+            rel="noopener"
+            >www.saechsdsb.de</a
+          >).
+        </p>
+      </div>
+    </ion-accordion>
+    <!-- Allgemeine Informationen -->
+    <ion-accordion value="allgemein">
+      <ion-item slot="header" button>
+        <ion-label>Allgemeine Informationen</ion-label>
+      </ion-item>
+      <div class="accordion-content" slot="content">
+        <p>Platzhalter für allgemeine Informationen …</p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
 </ion-content>
