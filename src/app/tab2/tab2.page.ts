@@ -22,4 +22,8 @@ export class Tab2Page {
   openDetail(item: { id: string; termin_id: string }) {
     this.router.navigate(['/detail', item.id, item.termin_id]);
   }
+  goImpressum() {
+    // absolute Navigation zur Standalone-Seite
+    this.router.navigateByUrl('/impressum', { replaceUrl: false });
+  }
 }

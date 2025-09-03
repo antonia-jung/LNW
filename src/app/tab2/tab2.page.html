@@ -1,20 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Links: Info/Impressum -->
+    <ion-buttons slot="start">
+      <ion-button aria-label="Info" (click)="goImpressum()" fill="clear">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Komplettes Programm</ion-title>
+
+    <ion-buttons slot="end"></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-header>
-    <ion-toolbar>
-      <!-- Links: Info-Icon -->
-      <ion-buttons slot="start">
-        <ion-button aria-label="Info">
-          <ion-icon name="information-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-
-      <ion-title>Komplettes Programm</ion-title>
-
-      <!-- Rechts leer lassen (optional) -->
-      <ion-buttons slot="end"></ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-
   <!-- Gruppen nach Uhrzeit -->
   <ng-container *ngFor="let group of getdata.getGroupedData()">
     <!-- Überschrift für Uhrzeit -->
@@ -42,8 +41,7 @@
           name="heart"
           *ngIf="getdata.isFavorit(item.id, item.termin_id)"
           aria-hidden="true"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-card-header>
 
       <ion-card-content>
@@ -88,34 +86,31 @@
     </ion-item>
   </ng-container>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-
-  <!-- FAB: unten rechts, mit expandierender Liste nach oben -->
+  <!-- FAB: unten rechts, mit expandierender Liste nach oben 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
-    <!-- Haupt-FAB (öffnet/schließt die Liste automatisch) -->
     <ion-fab-button class="fab-orange" aria-label="Menü">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-fab-button>
 
-    <!-- Drei zusätzliche Actions nach oben -->
     <ion-fab-list side="top">
-      <ion-fab-button class="fab-action">
+      <ion-fab-button class="fab-action" aria-label="Kinder geeignet">
         <ion-icon
           src="assets/lndw_icon_kids.svg"
           title="Kinder geeignet"
         ></ion-icon>
       </ion-fab-button>
-      <ion-fab-button class="fab-action" aria-label="Filtern">
+      <ion-fab-button class="fab-action" aria-label="Barrierefrei">
         <ion-icon
           src="assets/lndw_icon_barrierenfrei.svg"
           title="Barrierefrei"
         ></ion-icon>
       </ion-fab-button>
-      <ion-fab-button class="fab-action" aria-label="Kalender">
-        <ion-icon src="assets/lndw_icon_englisch.svg" title="English available"
-          >li</ion-icon
-        >
+      <ion-fab-button class="fab-action" aria-label="English available">
+        <ion-icon
+          src="assets/lndw_icon_englisch.svg"
+          title="English available"
+        ></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>
