@@ -14,16 +14,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Gruppen nach Uhrzeit -->
-  <ng-container *ngFor="let group of getdata.getGroupedData()">
-    <!-- Überschrift für Uhrzeit -->
+  <!-- Gruppen nach Uhrzeit (JETZT gefiltert) -->
+  <ng-container *ngFor="let group of filteredGroups">
     <ion-item lines="none" class="group-header">
       <ion-label>
         <h2>{{ group.time.replace(':', '.') }} Uhr</h2>
       </ion-label>
     </ion-item>
 
-    <!-- Karten für diese Uhrzeit -->
     <ion-card
       *ngFor="let item of group.items; trackBy: trackById"
       (click)="openDetail(item)"
@@ -79,33 +77,56 @@
     </ion-card>
   </ng-container>
 
-  <!-- Optional: Leer- und Ladezustände -->
+  <!-- Leer-/Ladezustände -->
   <ng-container *ngIf="!getdata.data?.length">
     <ion-item lines="none">
       <ion-label>Wird geladen oder keine Einträge gefunden…</ion-label>
     </ion-item>
   </ng-container>
 
-  <!-- FAB: unten rechts, mit expandierender Liste nach oben -->
+  <!-- FAB: unten rechts -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
-    <ion-fab-button class="fab-orange" aria-label="Menü">
+    <ion-fab-button class="fab-orange" aria-label="Filter Menü">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-fab-button>
 
     <ion-fab-list side="top">
-      <ion-fab-button class="fab-action" aria-label="Kinder geeignet">
+      <!-- Kinder -->
+      <ion-fab-button
+        class="fab-action"
+        [class.active]="isActive('kinder')"
+        [attr.aria-pressed]="isActive('kinder')"
+        aria-label="Kinder geeignet filtern"
+        (click)="toggleFilter('kinder')"
+      >
         <ion-icon
           src="assets/lndw_icon_kids.svg"
           title="Kinder geeignet"
         ></ion-icon>
       </ion-fab-button>
-      <ion-fab-button class="fab-action" aria-label="Barrierefrei">
+
+      <!-- Barrierefrei -->
+      <ion-fab-button
+        class="fab-action"
+        [class.active]="isActive('barrierefrei')"
+        [attr.aria-pressed]="isActive('barrierefrei')"
+        aria-label="Barrierefrei filtern"
+        (click)="toggleFilter('barrierefrei')"
+      >
         <ion-icon
           src="assets/lndw_icon_barrierenfrei.svg"
           title="Barrierefrei"
         ></ion-icon>
       </ion-fab-button>
-      <ion-fab-button class="fab-action" aria-label="English available">
+
+      <!-- Englisch -->
+      <ion-fab-button
+        class="fab-action"
+        [class.active]="isActive('english')"
+        [attr.aria-pressed]="isActive('english')"
+        aria-label="Englisch filtern"
+        (click)="toggleFilter('english')"
+      >
         <ion-icon
           src="assets/lndw_icon_englisch.svg"
           title="English available"
@@ -113,4 +134,13 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
+
+  <!-- Optional: „Filter zurücksetzen“ Button als kleines Badge links unten -->
+  <!--
+  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+    <ion-fab-button size="small" *ngIf="isActive('kinder') || isActive('barrierefrei') || isActive('english')" (click)="clearFilters()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  -->
 </ion-content>

@@ -210,3 +210,10 @@ ion-fab-button.fab-orange .fab-badge {
     0 0 10px 4px rgba(246,105,44,0.16);  /* weicher runder Halo */
   pointer-events: none; /* nicht anklickbar */
 }
+
+/* Aktive Filter optisch hervorheben */
+ion-fab-button.fab-action.active {
+  --background: #F6692C;   /* Orange */
+  --color: #ffffff;
+}
+
