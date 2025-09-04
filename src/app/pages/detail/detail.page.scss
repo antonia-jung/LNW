@@ -117,3 +117,24 @@ ion-item ion-icon[src^="assets/"]:not(.tag) {
   filter: brightness(0) saturate(100%) invert(20%) sepia(26%) saturate(2061%)
           hue-rotate(230deg) brightness(88%) contrast(94%);
 }
+
+.fav-heart{
+  color: #ffffff !important;
+}
+
+/* Nur das Herz im großen Button: weiß, größer und mit dickerer Outline */
+ion-item.fav-item .fav-button ion-icon.fav-heart[name^="heart"] {
+  color: #ffffff !important;
+  font-size: 20px;                 /* größer = besser sichtbar */
+  --ionicon-stroke-width: 32px;    /* Ionicons 7 */
+  --ion-icon-stroke-width: 32px;   /* Fallback: manche Themes nutzen diese Var. */
+}
+
+/* Optional: am Desktop noch etwas größer/dicker */
+@media (min-width: 992px) {
+  ion-item.fav-item .fav-button ion-icon.fav-heart[name^="heart"] {
+    font-size: 20px;
+    --ionicon-stroke-width: 32px;
+    --ion-icon-stroke-width: 32px;
+  }
+}
