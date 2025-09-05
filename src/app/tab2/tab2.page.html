@@ -22,8 +22,9 @@
       </ion-label>
     </ion-item>
 
+    <!-- Nur die sichtbaren Einträge anzeigen -->
     <ion-card
-      *ngFor="let item of group.items; trackBy: trackById"
+      *ngFor="let item of group.items | slice:0:visibleEntries; trackBy: trackById"
       (click)="openDetail(item)"
     >
       <ion-card-header>
@@ -84,6 +85,15 @@
     </ion-item>
   </ng-container>
 
+  <!-- Infinite Scroll -->
+  <ion-infinite-scroll (ionInfinite)="ladeMehrDaten($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Lade mehr Einträge..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
   <!-- FAB: unten rechts -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
     <ion-fab-button class="fab-orange" aria-label="Filter Menü">
@@ -134,13 +144,4 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-
-  <!-- Optional: „Filter zurücksetzen“ Button als kleines Badge links unten -->
-  <!--
-  <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-    <ion-fab-button size="small" *ngIf="isActive('kinder') || isActive('barrierefrei') || isActive('english')" (click)="clearFilters()">
-      <ion-icon name="close-circle-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  -->
 </ion-content>

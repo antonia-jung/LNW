@@ -22,6 +22,10 @@ export class Tab2Page {
     english: false,
   };
 
+  // Infinite Scroll
+  visibleEntries = 30; // Anzahl der aktuell sichtbaren Einträge
+  increment = 30; // Anzahl der Einträge, die pro Scroll nachgeladen werden
+
   constructor(public getdata: GetdataService, private router: Router) {}
 
   trackById(_: number, item: { id: string; termin_id: string }) {
@@ -79,5 +83,25 @@ export class Tab2Page {
         return aH !== bH ? aH - bH : aM - bM;
       })
       .map((time) => ({ time, items: grouped[time] }));
+  }
+
+  /** Infinite Scroll Logik */
+  ladeMehrDaten(event?: any) {
+    // Prüfen, ob schon alle Einträge angezeigt werden
+    if (this.visibleEntries >= this.getdata.data.length) {
+      event.target.disabled = true; // Deaktiviere Infinite Scroll
+      event.target.complete(); // Ladeprozess beenden
+      return;
+    }
+
+    setTimeout(() => {
+      this.visibleEntries += this.increment;
+      event.target.complete();
+
+      // Wenn alle Einträge sichtbar → Infinite Scroll deaktivieren
+      if (this.visibleEntries >= this.getdata.data.length) {
+        event.target.disabled = true;
+      }
+    }, 500); // Simulierte Ladezeit
   }
 }
