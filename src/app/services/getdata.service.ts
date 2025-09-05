@@ -53,6 +53,12 @@ export class GetdataService {
   // <-- NEU: Flag für Ladezustand
   public dataLoaded: boolean = false;
 
+  // <-- NEU: Arrays für Segment-Filter
+  public themes: string[] = [];
+  public formats: string[] = [];
+  public places: string[] = [];
+  public institutions: string[] = [];
+
   constructor(
     private storage: Storage,
     private favCounter: FavoritesCounterService
@@ -72,6 +78,9 @@ export class GetdataService {
             end.getMinutes() < 10 ? '0' + end.getMinutes() : end.getMinutes()
           }`;
         });
+
+        // Themen, Formate, Orte, Einrichtungen extrahieren
+        this.extractSegments();
 
         // Kompletten Datensatz optional im Storage ablegen
         this.storage.set('data', this.data);
@@ -108,14 +117,65 @@ export class GetdataService {
 
       // <-- NEU: wenn alles geladen, Flag setzen
       this.dataLoaded = true;
+
+      // Segment-Listen erstellen
+      this.extractSegments();
     } catch (error) {
       console.error('Fehler beim Laden der Daten:', error);
       this.data = [];
       this.orte = [];
-
-      // Fehlerfall: bleibt false
       this.dataLoaded = false;
     }
+  }
+
+  // ----------------------
+  // Segment-Listen extrahieren
+  // ----------------------
+  private extractSegments() {
+    // Themen
+    this.themes = [];
+    this.data.forEach((item) => {
+      if (item.themen) {
+        item.themen
+          .split(',')
+          .map((t) => t.trim())
+          .forEach((t) => {
+            if (!this.themes.includes(t)) this.themes.push(t);
+          });
+      }
+    });
+    this.themes.sort((a, b) => a.localeCompare(b));
+
+    // Formate
+    this.formats = [];
+    this.data.forEach((item) => {
+      if (item.format) {
+        const formats = item.format.split(',').map((f) => f.trim());
+        formats.forEach((f) => {
+          if (!this.formats.includes(f)) this.formats.push(f);
+        });
+      }
+    });
+    this.formats.sort((a, b) => a.localeCompare(b));
+
+    // Orte
+    this.places = [];
+    this.data.forEach((item) => {
+      if (item.ort) {
+        if (!this.places.includes(item.ort)) this.places.push(item.ort);
+      }
+    });
+    this.places.sort((a, b) => a.localeCompare(b));
+
+    // Einrichtungen
+    this.institutions = [];
+    this.data.forEach((item) => {
+      if (item.einrichtung) {
+        if (!this.institutions.includes(item.einrichtung))
+          this.institutions.push(item.einrichtung);
+      }
+    });
+    this.institutions.sort((a, b) => a.localeCompare(b));
   }
 
   // ----------------------
@@ -146,7 +206,6 @@ export class GetdataService {
   }
 
   async toogleFavorit(id: string, termin_id: string) {
-    // (optional: in toggleFavorit umbenennen)
     const idx = this.favoriten.findIndex(
       (f) => f.id === id && f.termin_id === termin_id
     );
@@ -163,7 +222,7 @@ export class GetdataService {
     this.favCounter.set(this.favoriten.length);
   }
 
-  /** Liste der favorisierten Einträge (robust, falls data leer) */
+  /** Liste der favorisierten Einträge */
   getFavoritenEntries(): EintragData[] {
     if (!this.data?.length || !this.favoriten?.length) return [];
     const favSet = new Set(
@@ -172,7 +231,7 @@ export class GetdataService {
     return this.data.filter((e) => favSet.has(`${e.id}::${e.termin_id}`));
   }
 
-  /** Anzahl der Favoriten (falls du es irgendwo direkt brauchst) */
+  /** Anzahl der Favoriten */
   getFavoritenCount(): number {
     return this.favoriten.length;
   }

@@ -1,146 +1,188 @@
 <ion-header>
   <ion-toolbar>
-    <!-- Links: Info/Impressum -->
     <ion-buttons slot="start">
       <ion-button aria-label="Info" (click)="goImpressum()" fill="clear">
         <ion-icon name="information-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title>{{ segmentLabel }}</ion-title>
+  </ion-toolbar>
 
-    <ion-title>Komplettes Programm</ion-title>
-
-    <ion-buttons slot="end"></ion-buttons>
+  <!-- Segment-Menü -->
+  <ion-toolbar class="toolbar-normal">
+    <ion-segment [scrollable]="true" [(ngModel)]="selectedSegment">
+      <ion-segment-button
+        value="Komplett"
+        (click)="setSegmentLabel('Komplett')"
+      >
+        <ion-icon src="../../../assets/myicons/Programm.svg"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="Themen" (click)="setSegmentLabel('Themen')">
+        <ion-icon src="../../../assets/myicons/Themen.svg"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="Formate" (click)="setSegmentLabel('Formate')">
+        <ion-icon src="../../../assets/myicons/Formate.svg"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="Orte" (click)="setSegmentLabel('Orte')">
+        <ion-icon src="../../../assets/myicons/orte.svg"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button
+        value="Einrichtungen"
+        (click)="setSegmentLabel('Einrichtungen')"
+      >
+        <ion-icon src="../../../assets/myicons/Einrichtungen.svg"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Gruppen nach Uhrzeit (JETZT gefiltert) -->
-  <ng-container *ngFor="let group of filteredGroups">
-    <ion-item lines="none" class="group-header">
-      <ion-label>
-        <h2>{{ group.time.replace(':', '.') }} Uhr</h2>
-      </ion-label>
-    </ion-item>
+  <!-- Auswahllisten (Themen / Formate / Orte / Einrichtungen) -->
+  <div *ngIf="contentSelector !== 'Komplett' && selectedTheme === ''">
+    <ion-list *ngIf="contentSelector === 'Themen'">
+      <ion-item *ngFor="let theme of uniqueThemes" (click)="selectTheme(theme)">
+        {{ theme }}
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
 
-    <!-- Nur die sichtbaren Einträge anzeigen -->
-    <ion-card
-      *ngFor="let item of group.items | slice:0:visibleEntries; trackBy: trackById"
-      (click)="openDetail(item)"
-    >
-      <ion-card-header>
-        <ion-card-title>{{ item.titel }}</ion-card-title>
-        <ion-card-subtitle>
-          <ion-icon class="time" name="time-outline"></ion-icon>
-          {{ item.beginn }} – {{ item.ende }}
-        </ion-card-subtitle>
+    <ion-list *ngIf="contentSelector === 'Formate'">
+      <ion-item
+        *ngFor="let format of uniqueFormats"
+        (click)="selectTheme(format)"
+      >
+        {{ format }}
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
 
-        <!-- Favoriten-Indikator (nur Anzeige, kein Button) -->
-        <ion-icon
-          class="fav-indicator"
-          name="heart"
-          *ngIf="getdata.isFavorit(item.id, item.termin_id)"
-          aria-hidden="true"
-        ></ion-icon>
-      </ion-card-header>
+    <ion-list *ngIf="contentSelector === 'Orte'">
+      <ion-item *ngFor="let ort of uniqueOrte" (click)="selectTheme(ort)">
+        {{ ort }}
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
 
-      <ion-card-content>
-        <div class="meta-icons">
-          <div class="left-icons">
-            <ng-container *ngIf="item.kinder">
+    <ion-list *ngIf="contentSelector === 'Einrichtungen'">
+      <ion-item
+        *ngFor="let inst of uniqueEinrichtungen"
+        (click)="selectTheme(inst)"
+      >
+        {{ inst }}
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Einträge -->
+  <ng-container *ngIf="contentSelector === 'Komplett' || selectedTheme !== ''">
+    <ng-container *ngFor="let group of filteredGroups">
+      <ion-item lines="none" class="group-header">
+        <ion-label><h2>{{ group.time.replace(':', '.') }} Uhr</h2></ion-label>
+      </ion-item>
+
+      <ion-card *ngFor="let item of group.items; trackBy: trackById">
+        <ion-card-header>
+          <ion-card-title>{{ item.titel }}</ion-card-title>
+          <ion-card-subtitle>
+            <span class="time">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ item.beginn }} – {{ item.ende }}
+            </span>
+          </ion-card-subtitle>
+
+          <ion-icon
+            *ngIf="item.favorit !== undefined"
+            class="fav-heart"
+            [name]="item.favorit ? 'heart' : 'heart-outline'"
+            [style.color]="item.favorit ? 'var(--ion-color-danger)' : 'gray'"
+            (click)="toggleFavorit(item); $event.stopPropagation()"
+          ></ion-icon>
+        </ion-card-header>
+
+        <ion-card-content (click)="openDetail(item)">
+          <div class="meta-icons">
+            <div class="left-icons">
               <ion-icon
+                *ngIf="item.kinder"
                 src="assets/lndw_icon_kids.svg"
                 title="Kinder geeignet"
               ></ion-icon>
-              <span class="divider" *ngIf="(item.barrierefrei || item.english)"
-                >|</span
-              >
-            </ng-container>
+              <span
+                class="divider"
+                *ngIf="item.kinder && (item.barrierefrei || item.english)"
+              ></span>
 
-            <ng-container *ngIf="item.barrierefrei">
               <ion-icon
+                *ngIf="item.barrierefrei"
                 src="assets/lndw_icon_barrierenfrei.svg"
                 title="Barrierefrei"
               ></ion-icon>
-              <span class="divider" *ngIf="item.english">|</span>
-            </ng-container>
+              <span
+                class="divider"
+                *ngIf="item.barrierefrei && item.english"
+              ></span>
 
-            <ng-container *ngIf="item.english">
               <ion-icon
+                *ngIf="item.english"
                 src="assets/lndw_icon_englisch.svg"
                 title="English available"
               ></ion-icon>
-            </ng-container>
+            </div>
+            <div class="format-text">{{ item.format }}</div>
           </div>
-
-          <span class="format-text" [innerHTML]="item.format"></span>
-        </div>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
   </ng-container>
 
-  <!-- Leer-/Ladezustände -->
-  <ng-container *ngIf="!getdata.data?.length">
-    <ion-item lines="none">
-      <ion-label>Wird geladen oder keine Einträge gefunden…</ion-label>
-    </ion-item>
-  </ng-container>
-
-  <!-- Infinite Scroll -->
   <ion-infinite-scroll (ionInfinite)="ladeMehrDaten($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Lade mehr Einträge..."
-    >
-    </ion-infinite-scroll-content>
+    ></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <!-- FAB: unten rechts -->
+  <ng-container *ngIf="!eintraege.length">
+    <ion-item lines="none"
+      ><ion-label
+        >Wird geladen oder keine Einträge gefunden…</ion-label
+      ></ion-item
+    >
+  </ng-container>
+
+  <!-- FAB Filter -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
     <ion-fab-button class="fab-orange" aria-label="Filter Menü">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-fab-button>
 
     <ion-fab-list side="top">
-      <!-- Kinder -->
       <ion-fab-button
         class="fab-action"
         [class.active]="isActive('kinder')"
-        [attr.aria-pressed]="isActive('kinder')"
-        aria-label="Kinder geeignet filtern"
         (click)="toggleFilter('kinder')"
+        aria-label="Kinder"
       >
-        <ion-icon
-          src="assets/lndw_icon_kids.svg"
-          title="Kinder geeignet"
-        ></ion-icon>
+        <ion-icon src="assets/lndw_icon_kids.svg"></ion-icon>
       </ion-fab-button>
 
-      <!-- Barrierefrei -->
       <ion-fab-button
         class="fab-action"
         [class.active]="isActive('barrierefrei')"
-        [attr.aria-pressed]="isActive('barrierefrei')"
-        aria-label="Barrierefrei filtern"
         (click)="toggleFilter('barrierefrei')"
+        aria-label="Barrierefrei"
       >
-        <ion-icon
-          src="assets/lndw_icon_barrierenfrei.svg"
-          title="Barrierefrei"
-        ></ion-icon>
+        <ion-icon src="assets/lndw_icon_barrierenfrei.svg"></ion-icon>
       </ion-fab-button>
 
-      <!-- Englisch -->
       <ion-fab-button
         class="fab-action"
         [class.active]="isActive('english')"
-        [attr.aria-pressed]="isActive('english')"
-        aria-label="Englisch filtern"
         (click)="toggleFilter('english')"
+        aria-label="Englisch"
       >
-        <ion-icon
-          src="assets/lndw_icon_englisch.svg"
-          title="English available"
-        ></ion-icon>
+        <ion-icon src="assets/lndw_icon_englisch.svg"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
