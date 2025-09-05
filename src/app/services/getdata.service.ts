@@ -50,6 +50,9 @@ export class GetdataService {
   favoriten: Favorit[] = [];
   favoritesYear = '';
 
+  // <-- NEU: Flag für Ladezustand
+  public dataLoaded: boolean = false;
+
   constructor(
     private storage: Storage,
     private favCounter: FavoritesCounterService
@@ -102,10 +105,16 @@ export class GetdataService {
       const zwi = await response.json();
       this.data = zwi.data;
       this.orte = zwi.orte;
+
+      // <-- NEU: wenn alles geladen, Flag setzen
+      this.dataLoaded = true;
     } catch (error) {
       console.error('Fehler beim Laden der Daten:', error);
       this.data = [];
       this.orte = [];
+
+      // Fehlerfall: bleibt false
+      this.dataLoaded = false;
     }
   }
 
