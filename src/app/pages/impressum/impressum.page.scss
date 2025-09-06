@@ -5,10 +5,10 @@
   color: var(--ion-text-color);
 }
 
-/* HEADER: wie Detailseite – Verlauf + weiße Schrift/Icons */
+
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
-  --color: #ffffff; /* wirkt auf Titel & Buttons */
+  --color: #ffffff; 
 }
 ion-toolbar ion-title { color: #ffffff; }
 ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
@@ -73,16 +73,16 @@ h1 {
     margin-left: -0.5rem;
 }
 
-/* Accordion Header-Hintergrund und Text */
+
 ion-accordion ion-item[slot="header"] {
-  --background: #ffffff;   /* weißer Hintergrund */
-  --color: var(--lnw-lila); /* dein Lila für den Text */
+  --background: #ffffff;   
+  --color: var(--lnw-lila); 
   color: var(--lnw-lila);
 }
 
-/* Accordion Content-Hintergrund */
+
 ion-accordion .accordion-content {
-  background: #ffffff; /* weiß, nicht schwarz */
+  background: #ffffff; 
   color: var(--lnw-lila);
 }
 

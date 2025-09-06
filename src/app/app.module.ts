@@ -13,8 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule, // nutzt deine bestehenden Tabs-Routen (lazy loaded)
-    IonicStorageModule.forRoot(), // Storage-Setup für Angular
+    AppRoutingModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

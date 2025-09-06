@@ -1,119 +1,119 @@
-/* Grundfarben & Text */
+/* =========================================
+   Grundfarben & Text
+========================================= */
 :host {
   --lnw-lila: #4B3991;
   --ion-text-color: var(--lnw-lila);
   color: var(--ion-text-color);
 }
 
-/* HEADER: wie Detailseite – Verlauf + weiße Schrift/Icons */
+/* =========================================
+   Header (wie Detailseite – Verlauf + weiße Schrift/Icons)
+========================================= */
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
-  --color: #ffffff; /* wirkt auf Titel & Buttons */
+  --color: #ffffff; 
 }
 ion-toolbar ion-title { color: #ffffff; }
 ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
 ion-toolbar ion-icon { color: #ffffff; }
 
-/* Content-Hintergrund & Standard-Textfarbe */
+/* =========================================
+   Content-Hintergrund & Standard-Textfarbe
+========================================= */
 ion-content {
   --background: #ffffff;
   color: var(--ion-text-color);
 }
 
-/* Liste/Items */
+/* =========================================
+   Liste / Items
+========================================= */
 ion-item { --color: var(--ion-text-color); }
 ion-label, h1, h2, h3, h4, h5, h6, p, span { color: inherit; }
 
-/* Zeit-Icon in Karten */
-
-
-/* Meta-Icons + Format rechts */
+/* =========================================
+   Meta-Icons + Format rechts
+========================================= */
 .meta-icons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 8px;
+  margin: 0.5rem;
 
   .left-icons {
     display: flex;
-    align-items: center; /* Icon vertikal mittig */
-    gap: 8px; /* Abstand zwischen den Icons */
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .left-icons ion-icon {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #F6692C;
   }
 
   .left-icons .divider {
-    width: 1px;
-    height: 14px;
-    background-color: #F6692C; /* orangener Divider */
+    width: 0.0625rem;
+    height: 0.875rem;
+    background-color: #F6692C;
   }
 
   .format-text {
     font-size: 0.85rem;
     font-weight: 600;
     text-align: right;
-    min-width: 80px;
+    min-width: 5rem;
     color: var(--ion-text-color);
-    margin-right: -14px;
+    margin-right: -0.875rem;
   }
 }
 
-
-/* Gruppen-Header (Uhrzeit-Zeile) */
+/* =========================================
+   Gruppen-Header (Uhrzeit-Zeile)
+========================================= */
 .group-header {
   --background: #ffffff;
-  padding: 2px 2px;
-  border-bottom: 2px solid #E0E0E0; /* dezente Trennung */
+  padding: 0.125rem 0.125rem;
+  border-bottom: 0.125rem solid #E0E0E0;
 
   ion-label h2 {
     margin-top: 0.5rem;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #F6692C; /* ggf. auf var(--ion-text-color) ändern */
+    color: #F6692C;
   }
 }
 
-/* ===== Karten ===== */
-
-/* Karte hell halten (auch im Dark Mode) + abgerundete Ecken für Header-Hintergrund */
+/* =========================================
+   Karten
+========================================= */
 ion-card {
-   background: #ffffff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  margin: 12px 8px;
-  overflow: hidden; /* wichtig für runde Ecken am farbigen Header */
+  background: #ffffff;
+  border: 0.0625rem solid #eee;
+  border-radius: 0.5rem;
+  margin: 0.75rem 0.5rem;
+  overflow: hidden;
 
-  /* Asymmetrischer Schatten:
-     - erste Ebene: sehr subtil oben/links (negative Offsets)
-     - zweite Ebene: stärker rechts/unten (positive Offsets)
-  */
   --box-shadow:
-    -1px -1px 4px rgba(0,0,0,0.18),
-     4px 4px 4px rgba(0,0,0,0.24);
+    -0.0625rem -0.0625rem 0.25rem rgba(0,0,0,0.18),
+     0.25rem 0.25rem 0.25rem rgba(0,0,0,0.24);
   box-shadow: var(--box-shadow);
 }
 
-/* >>> Karten-Kopf einfärben (Titel + Uhrzeit) */
+/* Karten-Kopf einfärben */
 ion-card-header {
   position: relative;
   background-color: #F5F3F5;
-  padding: 8px 12px;
-  border-radius: 8px 8px 0 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
-/* Texte im Kartenkopf weiterhin in Lila */
-
-
-/* Karten-Inhalt (weiß) */
+/* Karten-Inhalt */
 ion-card-content {
   background-color: #ffffff;
   height: 1.8rem;
-  padding-left: 4px;
+  padding-left: 0.25rem;
 }
-
 ion-card-title {
   font-size: 0.95rem;
   font-weight: 650;
@@ -123,33 +123,33 @@ ion-card-title {
 ion-card-subtitle {
   font-size: 0.7rem;
   font-weight: 550;
-  margin-top: 2px;
+  margin-top: 0.125rem;
   display: flex;
-  align-items: center; /* alles linksbündig */
+  align-items: center;
   color: var(--ion-text-color);
 }
-
 .time {
   display: flex;
-  align-items: center; /* Icon und Text vertikal mittig */
-  gap: 4px;           /* kleine Lücke zwischen Icon und Text */
-  color: var(--ion-text-color); /* optional */
-}
-.time ion-icon {
-  font-size: 14px;
+  align-items: center;
+  gap: 0.25rem;
   color: var(--ion-text-color);
 }
-
+.time ion-icon {
+  font-size: 0.875rem;
+  color: var(--ion-text-color);
+}
 .fav-indicator {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 20px;
-  color: #F6692C; /* Orange, passend zu deinem Farbschema */
-  text-shadow: 0 0 4px rgba(0,0,0,0.3); /* leichter Schatten für bessere Sichtbarkeit */
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
+  color: #F6692C;
+  text-shadow: 0 0 0.25rem rgba(0,0,0,0.3);
 }
 
-/* Haupt-FAB (orange, rund) */
+/* =========================================
+   Haupt-FAB (orange, rund)
+========================================= */
 ion-fab-button.fab-orange {
   --background: #F6692C;
   --background-hover: #f87f4f;
@@ -157,34 +157,34 @@ ion-fab-button.fab-orange {
   --color: #ffffff;
   --ripple-color: rgba(255,255,255,0.3);
   --border-radius: 50%;
-  --box-shadow: none; /* vermeiden, wir setzen den Schatten am inneren Part */
-
+  --box-shadow: none;
   transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
 }
-/* runder, weicher Schatten genau um die Rundung */
 ion-fab-button.fab-orange::part(native) {
   border-radius: 50%;
   box-shadow:
-    0 10px 24px rgba(0,0,0,0.16),          /* Tiefe nach unten */
-    0 0 14px 8px rgba(246,105,44,0.10);    /* weicher Halo rundum */
+    0 0.625rem 1.5rem rgba(0,0,0,0.16),
+    0 0 0.875rem 0.5rem rgba(246,105,44,0.10);
   -webkit-transform: translateZ(0);
   will-change: box-shadow, transform;
 }
 ion-fab-button.fab-orange:hover::part(native) {
   box-shadow:
-    0 12px 28px rgba(0,0,0,0.18),
-    0 0 16px 9px rgba(246,105,44,0.1);
+    0 0.75rem 1.75rem rgba(0,0,0,0.18),
+    0 0 1rem 0.5625rem rgba(246,105,44,0.1);
 }
 ion-fab-button.fab-orange:active::part(native),
 ion-fab-button.fab-orange.ion-activated::part(native) {
-  transform: translateY(1px) scale(0.98);
+  transform: translateY(0.0625rem) scale(0.98);
   box-shadow:
-    0 8px 18px rgba(0,0,0,0.16),
-    0 0 12px 7px rgba(246,105,44,0.10);
+    0 0.5rem 1.125rem rgba(0,0,0,0.16),
+    0 0 0.75rem 0.4375rem rgba(246,105,44,0.10);
 }
-ion-fab-button.fab-orange ion-icon { font-size: 28px; }
+ion-fab-button.fab-orange ion-icon { font-size: 1.75rem; }
 
-/* Action-FABs (erscheinen darüber) */
+/* =========================================
+   Action-FABs (erscheinen darüber)
+========================================= */
 ion-fab-button.fab-action {
   --background: #ffffff;
   --color: #F6692C;
@@ -193,15 +193,14 @@ ion-fab-button.fab-action {
   --box-shadow: none;
 }
 ion-fab-button.fab-action::part(native) {
-  border: 1px solid rgba(246,105,44,0.28);
+  border: 0.0625rem solid rgba(246,105,44,0.28);
   border-radius: 50%;
   box-shadow:
-    0 8px 18px rgba(0,0,0,0.10),
-    0 0 10px 6px rgba(246,105,44,0.10);
+    0 0.5rem 1.125rem rgba(0,0,0,0.10),
+    0 0 0.625rem 0.375rem rgba(246,105,44,0.10);
   -webkit-transform: translateZ(0);
 }
 ion-fab[activated] ion-fab-button.fab-action::part(native) {
-  /* optional: leichtes Pop-in bei aktiviertem Zustand */
   animation: fab-pop 160ms ease;
 }
 @keyframes fab-pop {
@@ -209,22 +208,24 @@ ion-fab[activated] ion-fab-button.fab-action::part(native) {
   to   { transform: scale(1);   opacity: 1; }
 }
 
-/* Badge-Icon (klein, oben/links am Rand des FAB) */
+/* =========================================
+   Badge-Icon (klein, oben/links am Rand des FAB)
+========================================= */
 ion-fab-button.fab-orange .fab-badge {
   position: absolute;
-  top: -4px;            /* leicht über die Rundung hinaus */
-  left: -4px;
-  width: 22px;
-  height: 22px;
+  top: -0.25rem;
+  left: -0.25rem;
+  width: 1.375rem;
+  height: 1.375rem;
   border-radius: 50%;
-  background: #ffffff;  /* weißer Kreis hinter dem Icon */
-  color: #F6692C;       /* Icon orange */
+  background: #ffffff;
+  color: #F6692C;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;      /* Icon-Größe */
+  font-size: 0.875rem;
   box-shadow:
-    0 4px 10px rgba(0,0,0,0.16),
-    0 0 10px 4px rgba(246,105,44,0.16);  /* weicher runder Halo */
-  pointer-events: none; /* nicht anklickbar */
+    0 0.25rem 0.625rem rgba(0,0,0,0.16),
+    0 0 0.625rem 0.25rem rgba(246,105,44,0.16);
+  pointer-events: none;
 }

@@ -10,7 +10,7 @@ export class ApiInspector {
 
     console.group('[API] Verfügbare Felder');
     console.log('Felder:', [...keys].sort());
-    console.table(rows[0]); // Beispielzeile
+    console.table(rows[0]);
 
     const stats = [...keys].map((k) => ({
       field: k,
@@ -21,7 +21,6 @@ export class ApiInspector {
     console.groupEnd();
   }
 
-  /** Zeigt eindeutige Werte eines Feldes (z.B. Kategorie/Format). */
   static uniqueValues(rows: any[], field: string, limit = 50) {
     if (!rows || !rows.length) {
       console.warn('[API] Keine Daten geladen.');

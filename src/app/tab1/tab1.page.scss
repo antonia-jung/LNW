@@ -1,56 +1,73 @@
-/* HEADER: wie Detailseite – Verlauf + weiße Schrift/Icons */
+/* ============================= */
+/* ===== HEADER ================= */
+/* ============================= */
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
-  --color: #ffffff; /* wirkt auf Titel & Buttons */
-  
+  --color: #ffffff;
 }
-ion-toolbar ion-title { color: #ffffff;}
-ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
-ion-toolbar ion-icon { color: #ffffff; }
 
+ion-toolbar ion-title { 
+  color: #ffffff; 
+}
+
+ion-toolbar ion-button { 
+  --color: #ffffff; 
+  color: #ffffff; 
+}
+
+ion-toolbar ion-icon { 
+  color: #ffffff; 
+}
+
+/* ============================= */
+/* ===== Hintergrund ============ */
+/* ============================= */
 .background-image {
   --background: url('/assets/background.png');
   background-size: contain;
 }
 
+/* ============================= */
+/* ===== Titel / Logo ============ */
+/* ============================= */
 .title-container {
   text-align: center;
   margin-top: 2rem;
-
 }
+
 h1 {
   font-family: 'Montserrat';
   font-size: 2rem;
-  color:#ffffff;
+  color: #ffffff;
   font-weight: 1000;
 }
 
 .logo {
   width: 12rem;
   height: auto;
-  margin-top: 1rem;
-  border-radius: 20%;
-  border: 4px solid #ffffff;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
+  border-radius: 20%;
+  border: 0.25rem solid #ffffff; 
 }
 
+/* ============================= */
+/* ===== Textblöcke ============= */
+/* ============================= */
 .text {
-    color: #ffffff;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    text-align: left;
+  color: #ffffff;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-align: left;
 }
 
 h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 p {
-    line-height: 140%;
-    font-weight: 450;
-    
+  line-height: 1.4rem; 
+  font-weight: 450;
 }

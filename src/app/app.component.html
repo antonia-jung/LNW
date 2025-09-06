@@ -1,10 +1,8 @@
 <ion-app>
-  <!-- Falls Daten geladen sind -->
   <div *ngIf="getDataService.dataLoaded">
     <ion-router-outlet></ion-router-outlet>
   </div>
 
-  <!-- Falls Daten noch NICHT geladen sind -->
   <div *ngIf="!getDataService.dataLoaded" class="loading-overlay">
     <div class="loading-box">
       <ion-spinner></ion-spinner>

@@ -1,33 +1,31 @@
-/* ============================= */
+
 /* ===== Grundfarben & Text ===== */
-/* ============================= */
+
 :host {
   --lnw-lila: #4B3991;
   --ion-text-color: var(--lnw-lila);
   color: var(--ion-text-color);
 }
 
-/* ============================= */
-/* ===== Toolbar/Header ========= */
-/* ============================= */
+
+/* ===== Toolbar / Header ======= */
+
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
   --color: #ffffff;
 }
+
 ion-toolbar ion-title,
 ion-toolbar ion-button,
 ion-toolbar ion-icon {
   color: #ffffff;
 }
 
-/* zweite Toolbar (Segment) */
 ion-toolbar.toolbar-normal {
   --background: #ffffff;
   --color: var(--lnw-lila);
- 
 }
 
-/* Segment Buttons */
 ion-segment-button {
   --color: var(--lnw-lila);
   --indicator-color: #6748B1;
@@ -35,25 +33,37 @@ ion-segment-button {
   font-weight: 500;
 }
 
-/* ============================= */
+ion-segment-button[aria-checked="true"] {
+  color: #ffffff;
+}
+
+ion-segment {
+  --indicator-color: var(--lnw-lila);
+}
+
+@media (min-width: 768px) {
+  ion-toolbar.toolbar-normal {
+    --background: #F6692C;
+    --color: #ffffff;
+  }
+}
+
+
 /* ===== Content Hintergrund ==== */
-/* ============================= */
+
 ion-content {
   --background: #ffffff;
   color: var(--ion-text-color);
 }
 
-/* ============================= */
+
 /* ===== Listen (Auswahl) ======= */
-/* ============================= */
+
 ion-list {
   background: #ffffff;
   margin: 0;
   align-items: center;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 0.5rem;
 }
 
 ion-list ion-item {
@@ -61,106 +71,95 @@ ion-list ion-item {
   --color: var(--lnw-lila);
   font-size: 0.9rem;
   font-weight: 500;
-  margin: 0.5rem 0 0.5rem 0;
-  
-  
+  margin: 0.5rem 0;
 }
 
 ion-list ion-item ion-icon {
   color: #6748B1;
-  padding-left: 1rem;
+  padding-left: 0.625rem;
 }
 
-/* ============================= */
+
 /* ===== Gruppen-Header ========= */
-/* ============================= */
+
 .group-header {
   --background: #ffffff;
-  padding: 2px 2px;
-  border-bottom: 2px solid #E0E0E0;
-
-  ion-label h2 {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #F6692C;
-  }
+  padding: 0.125rem;
+  border-bottom: 0.125rem solid #E0E0E0;
 }
 
-/* ============================= */
+.group-header ion-label h2 {
+  margin-top: 0.25rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #F6692C;
+}
+
+
 /* ===== Karten Styling ========= */
-/* ============================= */
+
 ion-card {
   background: #ffffff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  margin: 12px 8px;
-   overflow: hidden; /* wichtig für runde Ecken am farbigen Header */
-
-  /* Asymmetrischer Schatten:
-     - erste Ebene: sehr subtil oben/links (negative Offsets)
-     - zweite Ebene: stärker rechts/unten (positive Offsets)
-  */
+  border: 0.0625rem solid #eee;
+  border-radius: 0.5rem;
+  margin: 0.75rem 0.5rem;
+  overflow: hidden;
   --box-shadow:
-    -1px -1px 4px rgba(0,0,0,0.18),
-     4px 4px 4px rgba(0,0,0,0.24);
+    -0.0625rem -0.0625rem 0.25rem rgba(0,0,0,0.18),
+     0.25rem 0.25rem 0.25rem rgba(0,0,0,0.24);
   box-shadow: var(--box-shadow);
 }
 
-/* Kartenkopf */
 ion-card-header {
   position: relative;
   background-color: #F5F3F5;
-  padding: 8px 12px;
-  border-radius: 8px 8px 0 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem 0.5rem 0 0;
 }
 
-/* Favoriten-Herz */
 .fav-heart {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 20px;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 1.25rem;
   z-index: 10;
 }
-.fav-heart[name="heart"] {
-  color: #F6692C !important;
-}
-.fav-heart[name="outline-heart"] {
-  color: #bbb;
-}
 
-/* Titel + Uhrzeit */
+.fav-heart[name="heart"] { color: #F6692C !important; }
+.fav-heart[name="outline-heart"] { color: #bbb; }
+
 ion-card-title {
   font-size: 0.95rem;
   font-weight: 650;
   margin: 0;
   color: var(--ion-text-color);
 }
+
 ion-card-subtitle {
   font-size: 0.8rem;
   font-weight: 550;
-  margin-top: 2px;
+  margin-top: 0.125rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--ion-text-color);
 }
+
 .time {
-  font-size: 12px;
+  font-size: 0.75rem;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 }
+
 .time ion-icon {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--ion-text-color);
 }
 
-/* Karteninhalt */
 ion-card-content {
   background-color: #ffffff;
-  padding: 8px 12px;
+  padding: 0.5rem 0.75rem;
 }
 
 /* Meta-Icons + Format rechts */
@@ -168,34 +167,37 @@ ion-card-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4px;
-
-  .left-icons {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    ion-icon {
-      font-size: 20px;
-      color: #F6692C;
-    }
-    .divider {
-      width: 1px;
-      height: 14px;
-      background-color: #F6692C;
-    }
-  }
-
-  .format-text {
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-align: right;
-    min-width: 80px;
-    color: var(--ion-text-color);
-  }
+  margin-top: 0.25rem;
 }
 
-/* Haupt-FAB (orange, rund) */
+.meta-icons .left-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-icons .left-icons ion-icon {
+  font-size: 1.25rem;
+  color: #F6692C;
+}
+
+.meta-icons .divider {
+  width: 0.0625rem;
+  height: 0.875rem;
+  background-color: #F6692C;
+}
+
+.format-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  min-width: 5rem;
+  color: var(--ion-text-color);
+}
+
+
+/* ===== FAB Styling ============ */
+
 ion-fab-button.fab-orange {
   --background: #F6692C;
   --background-hover: #f87f4f;
@@ -203,34 +205,32 @@ ion-fab-button.fab-orange {
   --color: #ffffff;
   --ripple-color: rgba(255,255,255,0.3);
   --border-radius: 50%;
-  --box-shadow: none; /* vermeiden, wir setzen den Schatten am inneren Part */
-
+  --box-shadow: none;
   transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
 }
-/* runder, weicher Schatten genau um die Rundung */
+
 ion-fab-button.fab-orange::part(native) {
   border-radius: 50%;
-  box-shadow:
-    0 10px 24px rgba(0,0,0,0.16),          /* Tiefe nach unten */
-    0 0 14px 8px rgba(246,105,44,0.10);    /* weicher Halo rundum */
+  box-shadow: 0 0.625rem 1.5rem rgba(0,0,0,0.16),
+              0 0 0.875rem 0.5rem rgba(246,105,44,0.10);
   -webkit-transform: translateZ(0);
   will-change: box-shadow, transform;
 }
+
 ion-fab-button.fab-orange:hover::part(native) {
-  box-shadow:
-    0 12px 28px rgba(0,0,0,0.18),
-    0 0 16px 9px rgba(246,105,44,0.1);
+  box-shadow: 0 0.75rem 1.75rem rgba(0,0,0,0.18),
+              0 0 1rem 0.5625rem rgba(246,105,44,0.1);
 }
+
 ion-fab-button.fab-orange:active::part(native),
 ion-fab-button.fab-orange.ion-activated::part(native) {
-  transform: translateY(1px) scale(0.98);
-  box-shadow:
-    0 8px 18px rgba(0,0,0,0.16),
-    0 0 12px 7px rgba(246,105,44,0.10);
+  transform: translateY(0.0625rem) scale(0.98);
+  box-shadow: 0 0.5rem 1.125rem rgba(0,0,0,0.16),
+              0 0 0.75rem 0.4375rem rgba(246,105,44,0.10);
 }
-ion-fab-button.fab-orange ion-icon { font-size: 28px; }
 
-/* Action-FABs (erscheinen darüber) */
+ion-fab-button.fab-orange ion-icon { font-size: 1.75rem; }
+
 ion-fab-button.fab-action {
   --background: #ffffff;
   --color: #F6692C;
@@ -238,61 +238,72 @@ ion-fab-button.fab-action {
   --border-radius: 50%;
   --box-shadow: none;
 }
+
 ion-fab-button.fab-action::part(native) {
-  border: 1px solid rgba(246,105,44,0.28);
+  border: 0.0625rem solid rgba(246,105,44,0.28);
   border-radius: 50%;
-  box-shadow:
-    0 8px 18px rgba(0,0,0,0.10),
-    0 0 10px 6px rgba(246,105,44,0.10);
+  box-shadow: 0 0.5rem 1.125rem rgba(0,0,0,0.10),
+              0 0 0.625rem 0.375rem rgba(246,105,44,0.10);
   -webkit-transform: translateZ(0);
 }
+
 ion-fab[activated] ion-fab-button.fab-action::part(native) {
-  /* optional: leichtes Pop-in bei aktiviertem Zustand */
   animation: fab-pop 160ms ease;
 }
+
 @keyframes fab-pop {
   from { transform: scale(0.9); opacity: 0.8; }
-  to   { transform: scale(1);   opacity: 1; }
+  to   { transform: scale(1); opacity: 1; }
 }
 
-/* Badge-Icon (klein, oben/links am Rand des FAB) */
 ion-fab-button.fab-orange .fab-badge {
   position: absolute;
-  top: -4px;            /* leicht über die Rundung hinaus */
-  left: -4px;
-  width: 22px;
-  height: 22px;
+  top: -0.25rem;
+  left: -0.25rem;
+  width: 1.375rem;
+  height: 1.375rem;
   border-radius: 50%;
-  background: #ffffff;  /* weißer Kreis hinter dem Icon */
-  color: #F6692C;       /* Icon orange */
+  background: #ffffff;
+  color: #F6692C;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;      /* Icon-Größe */
-  box-shadow:
-    0 4px 10px rgba(0,0,0,0.16),
-    0 0 10px 4px rgba(246,105,44,0.16);  /* weicher runder Halo */
-  pointer-events: none; /* nicht anklickbar */
+  font-size: 0.875rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0,0,0,0.16),
+              0 0 0.625rem 0.25rem rgba(246,105,44,0.16);
+  pointer-events: none;
 }
 
-
-/* Aktive Filter optisch hervorheben */
 ion-fab-button.fab-action.active {
-  --background: #F6692C;   /* Orange */
+  --background: #F6692C;
   --color: #ffffff;
 }
 
-/* ============================= */
-/* ===== Segmente Styling ====== */
-/* ============================= */
-ion-segment-button {
-  color: var(--lnw-lila); /* inaktiv = lila */
+
+/* ===== Sonstiges Styling ====== */
+
+ion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-ion-segment-button[aria-checked="true"] {
-  color: #ffffff; /* aktiv = weiß */
+.item-text {
+  flex: 1;
 }
 
-ion-segment {
-  --indicator-color: var(--lnw-lila); /* Scroller lila */
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+  margin-left: 0.625rem;
+  background-color: #F6692C;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.625rem;
+  text-align: center;
 }

@@ -7,6 +7,7 @@ import { GetdataService, EintragData } from '../services/getdata.service';
 import { FormsModule } from '@angular/forms';
 import { EintragComponent } from '../components/eintrag/eintrag.component';
 
+// Filter-Typen für FAB-Filter
 type FilterKey = 'kinder' | 'barrierefrei' | 'english';
 
 @Component({
@@ -23,14 +24,17 @@ type FilterKey = 'kinder' | 'barrierefrei' | 'english';
   ],
 })
 export class Tab2Page {
+  /* ============================= */
+  /* ======== State / Properties = */
+  /* ============================= */
   filters: Record<FilterKey, boolean> = {
     kinder: false,
     barrierefrei: false,
     english: false,
   };
 
-  visibleEntries = 30;
-  increment = 30;
+  visibleEntries = 30; // Anzahl aktuell sichtbarer Einträge
+  increment = 30; // Anzahl, die bei Scroll nachgeladen wird
 
   selectedSegment: string = 'Komplett';
   contentSelector: string = 'Komplett';
@@ -40,25 +44,35 @@ export class Tab2Page {
   eintraege: EintragData[] = [];
   lastBeginn: string = '';
 
+  /* ============================= */
+  /* ======== Konstruktor ========= */
+  /* ============================= */
   constructor(public getdata: GetdataService, private router: Router) {
     this.setEintraege();
   }
 
-  // TrackBy für ngFor
+  /* ============================= */
+  /* ======== Utility Methods ===== */
+  /* ============================= */
+
+  // TrackBy für ngFor, verbessert Performance
   trackById(_: number, item: EintragData) {
     return `${item.id}-${item.termin_id}`;
   }
 
-  // Detailseite öffnen
+  // Navigation zur Detailseite
   openDetail(item: EintragData) {
     this.router.navigate(['/detail', item.id, item.termin_id]);
   }
 
+  // Navigation zum Impressum
   goImpressum() {
     this.router.navigateByUrl('/impressum', { replaceUrl: false });
   }
 
-  // FAB-Filter
+  /* ============================= */
+  /* ======== FAB Filter ========= */
+  /* ============================= */
   toggleFilter(key: FilterKey) {
     this.filters[key] = !this.filters[key];
   }
@@ -71,13 +85,17 @@ export class Tab2Page {
     this.filters = { kinder: false, barrierefrei: false, english: false };
   }
 
-  // Favoriten
+  /* ============================= */
+  /* ======== Favoriten ========== */
+  /* ============================= */
   async toggleFavorit(item: EintragData) {
     await this.getdata.toogleFavorit(item.id, item.termin_id);
     item.favorit = this.getdata.isFavorit(item.id, item.termin_id);
   }
 
-  // Segment
+  /* ============================= */
+  /* ======== Segment / Theme ==== */
+  /* ============================= */
   setSegmentLabel(label: string) {
     this.segmentLabel = label;
     this.contentSelector = label;
@@ -90,7 +108,9 @@ export class Tab2Page {
     this.setEintraege();
   }
 
-  // Einträge laden + sortieren + filtern
+  /* ============================= */
+  /* ======== Einträge laden ===== */
+  /* ============================= */
   setEintraege() {
     const favSet = new Set(
       this.getdata.favoriten.map((f) => `${f.id}::${f.termin_id}`)
@@ -98,11 +118,11 @@ export class Tab2Page {
 
     let entries: EintragData[] = [];
 
+    // Filtern nach Segment + Theme
     switch (this.contentSelector) {
       case 'Komplett':
         entries = [...this.getdata.data];
         break;
-
       case 'Themen':
         if (this.selectedTheme) {
           entries = this.getdata.data.filter((item) =>
@@ -113,7 +133,6 @@ export class Tab2Page {
           );
         }
         break;
-
       case 'Formate':
         if (this.selectedTheme) {
           entries = this.getdata.data.filter(
@@ -121,7 +140,6 @@ export class Tab2Page {
           );
         }
         break;
-
       case 'Orte':
         if (this.selectedTheme) {
           entries = this.getdata.data.filter(
@@ -129,7 +147,6 @@ export class Tab2Page {
           );
         }
         break;
-
       case 'Einrichtungen':
         if (this.selectedTheme) {
           entries = this.getdata.data.filter(
@@ -139,13 +156,13 @@ export class Tab2Page {
         break;
     }
 
-    // Favoriten-Flag setzen
+    // Favoriten markieren
     this.eintraege = entries.map((item) => ({
       ...item,
       favorit: favSet.has(`${item.id}::${item.termin_id}`),
     }));
 
-    // Sortieren
+    // Einträge sortieren nach Zeit & Titel
     this.eintraege.sort((a, b) =>
       a.beginn > b.beginn
         ? 1
@@ -158,7 +175,9 @@ export class Tab2Page {
     this.lastBeginn = '';
   }
 
-  // Gruppieren + Filter (für FAB Filter)
+  /* ============================= */
+  /* ======== Gruppen + Filter ==== */
+  /* ============================= */
   get filteredGroups(): { time: string; items: EintragData[] }[] {
     const data = this.eintraege ?? [];
 
@@ -189,6 +208,9 @@ export class Tab2Page {
       .map((time) => ({ time, items: grouped[time] }));
   }
 
+  /* ============================= */
+  /* ======== Infinite Scroll ===== */
+  /* ============================= */
   ladeMehrDaten(event?: any) {
     if (this.visibleEntries >= this.eintraege.length) {
       event.target.disabled = true;
@@ -205,7 +227,9 @@ export class Tab2Page {
     }, 500);
   }
 
-  // Unique Lists für Auswahlmenüs
+  /* ============================= */
+  /* ======== Unique Listen ======= */
+  /* ============================= */
   get uniqueThemes(): string[] {
     const allThemes = this.getdata.data
       .map(
@@ -234,11 +258,39 @@ export class Tab2Page {
     ).sort();
   }
 
+  /* ============================= */
+  /* ======== Hilfsfunktionen ===== */
+  /* ============================= */
+
+  // Nur Überschrift für neue Zeit anzeigen
   setBeginn(eintrag: EintragData, index: number): boolean {
     if (index === 0 || eintrag.beginn !== this.lastBeginn) {
       this.lastBeginn = eintrag.beginn;
       return true;
     }
     return false;
+  }
+
+  // Anzahl Einträge pro Thema / Format / Ort / Einrichtung
+  getCountForTheme(theme: string): number {
+    return this.getdata.data.filter((e) =>
+      e.themen
+        ?.split(',')
+        .map((t) => t.trim())
+        .includes(theme)
+    ).length;
+  }
+
+  getCountForFormat(format: string): number {
+    return this.getdata.data.filter((e) => e.format === format).length;
+  }
+
+  getCountForOrt(ort: string): number {
+    return this.getdata.data.filter((e) => e.ort === ort).length;
+  }
+
+  getCountForEinrichtung(einrichtung: string): number {
+    return this.getdata.data.filter((e) => e.einrichtung === einrichtung)
+      .length;
   }
 }

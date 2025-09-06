@@ -46,19 +46,30 @@ type Group = { time: string; items: EintragData[] };
   styleUrls: ['./tab3.page.scss'],
 })
 export class Tab3Page {
+  /* ============================= */
+  /* ======== Konstruktor ========= */
+  /* ============================= */
   constructor(public getdata: GetdataService, private router: Router) {}
+
+  /* ============================= */
+  /* ======== Header / Navigation = */
+  /* ============================= */
 
   /** Header-Button: Impressum öffnen */
   goImpressum() {
     this.router.navigate(['/impressum']);
   }
 
-  /** Favoriten-Einträge aus dem Service */
+  /* ============================= */
+  /* ======== Favoriten ========== */
+  /* ============================= */
+
+  /** Favoriten-Einträge aus dem Service abrufen */
   getFavoriten(): EintragData[] {
     return this.getdata.getFavoritenEntries();
   }
 
-  /** Gruppierung der Favoriten nach Zeit (HH:MM) – analog zu Tab 2 */
+  /** Gruppierung der Favoriten nach Zeit (HH:MM) */
   getGroupedFavoriten(): Group[] {
     const favs = this.getFavoriten();
     if (!favs.length) return [];
@@ -79,18 +90,30 @@ export class Tab3Page {
       .map((time) => ({ time, items: grouped[time] }));
   }
 
+  /* ============================= */
+  /* ======== Karten / Details === */
+  /* ============================= */
+
+  // TrackBy für ngFor, verbessert Performance
   trackById = (_: number, item: EintragData) => `${item.id}::${item.termin_id}`;
 
+  // Detailseite öffnen beim Klick auf Karte
   openDetail(item: EintragData) {
     this.router.navigate(['/detail', item.id, item.termin_id]);
   }
 
+  // Zeit-Formatierung (optional, aktuell nur passt-through)
   formatTime(v?: string): string {
     return v ?? '';
   }
 
+  /* ============================= */
+  /* ======== Favoriten-Toggle === */
+  /* ============================= */
+
+  /** Favoriten umschalten, Karte nicht öffnen */
   async toggleFav(item: EintragData, ev: Event) {
-    ev.stopPropagation(); // Karte nicht öffnen
+    ev.stopPropagation();
     await this.getdata.toogleFavorit(item.id, item.termin_id);
   }
 }

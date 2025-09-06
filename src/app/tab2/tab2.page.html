@@ -1,4 +1,5 @@
 <ion-header>
+  <!-- ===== Top Toolbar: Info Button + Segment Label ===== -->
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button aria-label="Info" (click)="goImpressum()" fill="clear">
@@ -8,7 +9,7 @@
     <ion-title>{{ segmentLabel }}</ion-title>
   </ion-toolbar>
 
-  <!-- Segment-Menü -->
+  <!-- ===== Segment-Menü: Auswahl der Kategorien ===== -->
   <ion-toolbar class="toolbar-normal">
     <ion-segment [scrollable]="true" [(ngModel)]="selectedSegment">
       <ion-segment-button
@@ -61,32 +62,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Auswahllisten (Themen / Formate / Orte / Einrichtungen) -->
+  <!-- ===== Auswahllisten: Themen, Formate, Orte, Einrichtungen ===== -->
   <div *ngIf="contentSelector !== 'Komplett' && selectedTheme === ''">
+    <!-- Themen-Liste -->
     <ion-list *ngIf="contentSelector === 'Themen'">
       <ion-item *ngFor="let theme of uniqueThemes" (click)="selectTheme(theme)">
-        {{ theme }}
+        <span class="item-text">{{ theme }}</span>
+        <span class="count-badge">{{ getCountForTheme(theme) }}</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-item>
     </ion-list>
 
+    <!-- Formate-Liste -->
     <ion-list *ngIf="contentSelector === 'Formate'">
       <ion-item
         *ngFor="let format of uniqueFormats"
         (click)="selectTheme(format)"
       >
-        {{ format }}
+        <span class="item-text">{{ format }}</span>
+        <span class="count-badge">{{ getCountForFormat(format) }}</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-item>
     </ion-list>
 
+    <!-- Orte-Liste -->
     <ion-list *ngIf="contentSelector === 'Orte'">
       <ion-item *ngFor="let ort of uniqueOrte" (click)="selectTheme(ort)">
-        {{ ort }}
+        <span class="item-text">{{ ort }}</span>
+        <span class="count-badge">{{ getCountForOrt(ort) }}</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-item>
     </ion-list>
 
+    <!-- Einrichtungen-Liste -->
     <ion-list
       *ngIf="contentSelector === 'Einrichtungen'"
       class="einrichtungen-list"
@@ -95,19 +103,22 @@
         *ngFor="let inst of uniqueEinrichtungen"
         (click)="selectTheme(inst)"
       >
-        {{ inst }}
+        <span class="item-text">{{ inst }}</span>
+        <span class="count-badge">{{ getCountForEinrichtung(inst) }}</span>
         <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
       </ion-item>
     </ion-list>
   </div>
 
-  <!-- Einträge -->
+  <!-- ===== Einträge: Komplett oder ausgewähltes Thema ===== -->
   <ng-container *ngIf="contentSelector === 'Komplett' || selectedTheme !== ''">
     <ng-container *ngFor="let group of filteredGroups">
+      <!-- Gruppen-Header: Uhrzeit -->
       <ion-item lines="none" class="group-header">
         <ion-label><h2>{{ group.time.replace(':', '.') }} Uhr</h2></ion-label>
       </ion-item>
 
+      <!-- Einzelne Einträge als Karten -->
       <ion-card *ngFor="let item of group.items; trackBy: trackById">
         <ion-card-header>
           <ion-card-title>{{ item.titel }}</ion-card-title>
@@ -118,15 +129,18 @@
             </span>
           </ion-card-subtitle>
 
+          <!-- Favoriten-Herz -->
           <ion-icon
             *ngIf="item.favorit !== undefined"
             class="fav-heart"
             [name]="item.favorit ? 'heart' : 'outline-heart'"
             [style.color]="item.favorit ? 'var(--ion-color-danger)' : 'gray'"
             (click)="toggleFavorit(item); $event.stopPropagation()"
-          ></ion-icon>
+          >
+          </ion-icon>
         </ion-card-header>
 
+        <!-- Karteninhalt: Meta-Icons + Format -->
         <ion-card-content (click)="openDetail(item)">
           <div class="meta-icons">
             <div class="left-icons">
@@ -163,22 +177,25 @@
     </ng-container>
   </ng-container>
 
+  <!-- ===== Infinite Scroll ===== -->
   <ion-infinite-scroll (ionInfinite)="ladeMehrDaten($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Lade mehr Einträge..."
-    ></ion-infinite-scroll-content>
+    >
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <ng-container *ngIf="!eintraege.length">
-    <ion-item lines="none"
-      ><ion-label
-        >Wird geladen oder keine Einträge gefunden…</ion-label
-      ></ion-item
-    >
+  <!-- ===== Keine Einträge Meldung ===== -->
+  <ng-container
+    *ngIf="(contentSelector === 'Komplett' || selectedTheme !== '') && !eintraege.length"
+  >
+    <ion-item lines="none">
+      <ion-label>Wird geladen oder keine Einträge gefunden…</ion-label>
+    </ion-item>
   </ng-container>
 
-  <!-- FAB Filter -->
+  <!-- ===== FAB Filter Menü ===== -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="fab-br">
     <ion-fab-button class="fab-orange" aria-label="Filter Menü">
       <ion-icon name="filter-outline"></ion-icon>

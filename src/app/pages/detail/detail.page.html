@@ -8,7 +8,7 @@
 
     <ion-title>Details</ion-title>
 
-    <!-- Herz rechts im Header (Favorit) -->
+    <!-- Herz rechts im Header -->
     <ion-buttons slot="end">
       <ion-button
         fill="clear"
@@ -34,7 +34,7 @@
           </ion-label>
         </ion-item>
 
-        <!-- Zeit (robust formatiert) -->
+        <!-- Zeit -->
         <ion-item *ngIf="entry()?.beginn || entry()?.ende">
           <ion-icon
             slot="start"
@@ -69,7 +69,7 @@
           <ion-label>{{ entry()!.einrichtung }}</ion-label>
         </ion-item>
 
-        <!-- Format (mit HTML möglich) — bleibt unverändert -->
+        <!-- Format  -->
         <ion-item *ngIf="entry()?.format">
           <ion-icon
             slot="start"
@@ -91,7 +91,6 @@
           <ion-label>{{ entry()!.themen }}</ion-label>
         </ion-item>
 
-        <!-- Merkmale als eigene Zeilen (Icon + Text) -->
         <ion-item *ngIf="entry()?.kinder">
           <ion-icon
             slot="start"
@@ -125,7 +124,6 @@
           <ion-label class="tag">Englisch verfügbar</ion-label>
         </ion-item>
 
-        <!-- Großer Favoriten-Button -->
         <ion-item class="fav-item" lines="none">
           <ion-button class="fav-button" (click)="toggleFav()">
             <ion-icon

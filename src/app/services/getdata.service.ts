@@ -11,8 +11,8 @@ export interface EintragData {
   termin_id: string;
   titel: string;
   beschreibung: string;
-  beginn: string; // wird nach dem Laden zu "HH:MM" formatiert
-  ende: string; // wird nach dem Laden zu "HH:MM" formatiert
+  beginn: string;
+  ende: string;
   ort: string;
   ort_id: string;
   adresse: string;
@@ -46,14 +46,11 @@ export class GetdataService {
   orte: OrteData[] = [];
   counter = 0;
 
-  // Persistente Werte
   favoriten: Favorit[] = [];
   favoritesYear = '';
 
-  // <-- NEU: Flag für Ladezustand
   public dataLoaded: boolean = false;
 
-  // <-- NEU: Arrays für Segment-Filter
   public themes: string[] = [];
   public formats: string[] = [];
   public places: string[] = [];
@@ -115,10 +112,8 @@ export class GetdataService {
       this.data = zwi.data;
       this.orte = zwi.orte;
 
-      // <-- NEU: wenn alles geladen, Flag setzen
       this.dataLoaded = true;
 
-      // Segment-Listen erstellen
       this.extractSegments();
     } catch (error) {
       console.error('Fehler beim Laden der Daten:', error);

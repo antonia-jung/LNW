@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Minimaler Zähler-Service für die Tabs-Badge.
- * Nutze set(), increment(), decrement() – je nach Bedarf.
  */
 @Injectable({ providedIn: 'root' })
 export class FavoritesCounterService {

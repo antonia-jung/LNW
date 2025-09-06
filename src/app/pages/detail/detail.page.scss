@@ -1,15 +1,19 @@
-/* Farben & Grundtext auf der Seite */
+/* =========================================
+   Farben & Grundtext auf der Seite
+========================================= */
 :host {
   --lnw-lila: #6748B1;
 
-  /* Wichtig: auf Komponenten-Ebene das helle Ionic-Schema setzen */
+  /* Grundschema auf Komponenten-Ebene */
   --ion-text-color: var(--lnw-lila);
-  --ion-background-color: #ffffff;      /* globale Page-Var */
-  --ion-item-background: #ffffff;       /* Items hell */
+  --ion-background-color: #ffffff;   
+  --ion-item-background: #ffffff;    
   color: var(--ion-text-color);
 }
 
-/* HEADER: Verlauf + weiße Schrift/Icons */
+/* =========================================
+   Header: Farbverlauf + weiße Schrift/Icons
+========================================= */
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
   --color: #ffffff;
@@ -18,42 +22,46 @@ ion-toolbar ion-title { color: #ffffff; }
 ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
 ion-toolbar ion-icon { color: #ffffff; }
 
-/* Content hell */
+/* =========================================
+   Content hell
+========================================= */
 ion-content {
-  --background: #ffffff; /* wichtig: Variable, die ins Shadow DOM durchreicht */
+  --background: #ffffff; 
   color: var(--ion-text-color);
 }
 
-/* LISTE/ITEMS — hier liegt dein „schwarzes“ Problem */
+/* =========================================
+   Liste / Items
+========================================= */
 ion-list {
   background: transparent !important;
   --background: transparent !important;
 }
-
 ion-item {
   --background: #ffffff !important;
   --color: var(--lnw-lila) !important;
 }
-
 ion-label,
 h1, h2, h3, h4, h5, h6,
 p, span { color: inherit; }
 
-/* Detail-Titel größer */
+
 ion-label h2 {
-  margin: 0 0 6px 0;
+  margin: 0 0 0.375rem 0;    /* 6px */
   font-size: 1.4rem;
   font-weight: 600;
 }
 
-/* Abstand unter dem Infotext (Beschreibung im ersten Item) */
+
 ion-list > ion-item:first-of-type ion-label > div {
   display: block;
   margin-bottom: 0.8rem;
   margin-top: 0.8rem;
 }
 
-/* ===== ZENTRIERTER BUTTON ALS OVERLAY ===== */
+/* =========================================
+   Zentrierter Button als Overlay
+========================================= */
 .fav-center {
   position: fixed;
   left: 50%;
@@ -87,16 +95,14 @@ ion-list > ion-item:first-of-type ion-label > div {
   --background-activated: #5b3f9f;
   --border-radius: 9999px;
 }
-
 .tag { color: #F6692C; }
 
-/* =========================
-   Optional NUR Desktop hell erzwingen
-   (falls du mobile anders willst)
-   ========================= */
-@media (min-width: 992px) {
+/* =========================================
+   Nur Desktop (hell erzwingen)
+========================================= */
+@media (min-width: 62rem) { 
   :host {
-    color-scheme: light; /* signalisiert „hell“ */
+    color-scheme: light;
   }
   ion-content { --background: #ffffff !important; }
   ion-list { --background: transparent !important; }
@@ -106,36 +112,40 @@ ion-list > ion-item:first-of-type ion-label > div {
   }
 }
 
-/* Ionicons mit name=… direkt lila einfärben */
+/* =========================================
+   Icons einfärben
+========================================= */
+
 ion-item ion-icon[name] {
   color: var(--lnw-lila) !important;
 }
 
-/* Externe SVGs (src=assets/…) sichtbar machen:
-   Variante 1: Lila (#6748B1) */
+
 ion-item ion-icon[src^="assets/"]:not(.tag) {
   filter: brightness(0) saturate(100%) invert(20%) sepia(26%) saturate(2061%)
           hue-rotate(230deg) brightness(88%) contrast(94%);
 }
 
-.fav-heart{
+/* =========================================
+   Herz-Icon im Favoriten-Button
+========================================= */
+.fav-heart {
   color: #ffffff !important;
 }
 
-/* Nur das Herz im großen Button: weiß, größer und mit dickerer Outline */
+
 ion-item.fav-item .fav-button ion-icon.fav-heart[name^="heart"] {
   color: #ffffff !important;
-  font-size: 20px;                 /* größer = besser sichtbar */
-  --ionicon-stroke-width: 32px;    /* Ionicons 7 */
-  --ion-icon-stroke-width: 32px;   /* Fallback: manche Themes nutzen diese Var. */
+  font-size: 1.25rem;         
+  --ionicon-stroke-width: 2rem;
+  --ion-icon-stroke-width: 2rem;
 }
 
-/* Optional: am Desktop noch etwas größer/dicker */
-@media (min-width: 992px) {
+
+@media (min-width: 62rem) { 
   ion-item.fav-item .fav-button ion-icon.fav-heart[name^="heart"] {
-    font-size: 20px;
-    --ionicon-stroke-width: 32px;
-    --ion-icon-stroke-width: 32px;
+    font-size: 1.25rem;
+    --ionicon-stroke-width: 2rem;
+    --ion-icon-stroke-width: 2rem;
   }
 }
-

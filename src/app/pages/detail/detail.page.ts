@@ -55,9 +55,7 @@ export class DetailPage {
     ) {
       try {
         await (this.getdata as any).loadData();
-      } catch {
-        /* ignore */
-      }
+      } catch {}
     }
 
     const found =
@@ -74,9 +72,11 @@ export class DetailPage {
   back() {
     this.nav.back();
   }
+
   isLoading(): boolean {
     return this.loadingSig();
   }
+
   entry(): EintragData | null {
     return this.entrySig();
   }
@@ -85,15 +85,15 @@ export class DetailPage {
     const e = this.entrySig();
     return !!(e && this.getdata.isFavorit(e.id, e.termin_id));
   }
+
   toggleFav() {
     const e = this.entrySig();
     if (e) this.getdata.toogleFavorit(e.id, e.termin_id);
   }
 
-  /** Formatiert Zeiten robust: akzeptiert ISO-Datum, Date, Timestamp oder "HH:mm". */
+  /** Formatiert Zeit robust (ISO, Date, Timestamp, "HH:mm"). */
   formatTime(v: any): string {
     if (!v) return '';
-    // Bereits "HH:mm"?
     if (typeof v === 'string') {
       const m = v.match(/^(\d{1,2}):([0-5]\d)$/);
       if (m) {
@@ -101,7 +101,6 @@ export class DetailPage {
         const mm = m[2];
         return `${hh}:${mm}`;
       }
-      // Versuche als Datum zu interpretieren
       const d = new Date(v);
       if (!isNaN(d.getTime())) {
         return d.toLocaleTimeString('de-DE', {
@@ -110,9 +109,8 @@ export class DetailPage {
           hour12: false,
         });
       }
-      return v; // Fallback: zeige Rohwert
+      return v;
     }
-    // Zahl (epoch) oder Date
     if (typeof v === 'number') {
       const d = new Date(v);
       if (!isNaN(d.getTime())) {
@@ -134,7 +132,7 @@ export class DetailPage {
     return String(v);
   }
 
-  /** Themen als Komma-Liste (String oder Array). */
+  /** Gibt Themen als Komma-Liste zurück. */
   themenText(): string {
     const v: any = (this.entrySig() as any)?.themen;
     if (Array.isArray(v)) return v.filter(Boolean).join(', ');
