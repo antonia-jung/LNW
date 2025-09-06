@@ -19,32 +19,28 @@
         <ion-icon
           src="../../../assets/Programm.svg"
           [style.color]="selectedSegment === 'Komplett' ? '#ffffff' : 'var(--lnw-lila)'"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-segment-button>
 
       <ion-segment-button value="Themen" (click)="setSegmentLabel('Themen')">
         <ion-icon
           src="../../../assets/Themen.svg"
           [style.color]="selectedSegment === 'Themen' ? '#ffffff' : 'var(--lnw-lila)'"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-segment-button>
 
       <ion-segment-button value="Formate" (click)="setSegmentLabel('Formate')">
         <ion-icon
           src="../../../assets/Formate.svg"
           [style.color]="selectedSegment === 'Formate' ? '#ffffff' : 'var(--lnw-lila)'"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-segment-button>
 
       <ion-segment-button value="Orte" (click)="setSegmentLabel('Orte')">
         <ion-icon
           src="../../../assets/orte.svg"
           [style.color]="selectedSegment === 'Orte' ? '#ffffff' : 'var(--lnw-lila)'"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-segment-button>
 
       <ion-segment-button
@@ -54,8 +50,7 @@
         <ion-icon
           src="../../../assets/Einrichtungen.svg"
           [style.color]="selectedSegment === 'Einrichtungen' ? '#ffffff' : 'var(--lnw-lila)'"
-        >
-        </ion-icon>
+        ></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -119,7 +114,14 @@
       </ion-item>
 
       <!-- Einzelne Einträge als Karten -->
-      <ion-card *ngFor="let item of group.items; trackBy: trackById">
+      <ion-card
+        *ngFor="let item of group.items; trackBy: trackById"
+        (click)="openDetail(item)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="openDetail(item)"
+        (keydown.space)="$event.preventDefault(); openDetail(item)"
+      >
         <ion-card-header>
           <ion-card-title>{{ item.titel }}</ion-card-title>
           <ion-card-subtitle>
@@ -133,15 +135,16 @@
           <ion-icon
             *ngIf="item.favorit !== undefined"
             class="fav-heart"
-            [name]="item.favorit ? 'heart' : 'outline-heart'"
-            [style.color]="item.favorit ? 'var(--ion-color-danger)' : 'gray'"
-            (click)="toggleFavorit(item); $event.stopPropagation()"
-          >
-          </ion-icon>
+            name="heart"
+            [class.is-fav]="item.favorit"
+            (click)="onToggleFavorit(item, $event)"
+            [attr.aria-pressed]="item.favorit"
+            aria-label="Zu Favoriten"
+          ></ion-icon>
         </ion-card-header>
 
         <!-- Karteninhalt: Meta-Icons + Format -->
-        <ion-card-content (click)="openDetail(item)">
+        <ion-card-content>
           <div class="meta-icons">
             <div class="left-icons">
               <ion-icon

@@ -1,45 +1,31 @@
-
 /* ===== Grundfarben & Text ===== */
-
 :host {
   --lnw-lila: #4B3991;
   --ion-text-color: var(--lnw-lila);
   color: var(--ion-text-color);
 }
 
-
 /* ===== Toolbar / Header ======= */
-
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
   --color: #ffffff;
 }
-
 ion-toolbar ion-title,
 ion-toolbar ion-button,
-ion-toolbar ion-icon {
-  color: #ffffff;
-}
+ion-toolbar ion-icon { color: #ffffff; }
 
 ion-toolbar.toolbar-normal {
   --background: #ffffff;
   --color: var(--lnw-lila);
 }
-
 ion-segment-button {
   --color: var(--lnw-lila);
   --indicator-color: #6748B1;
   font-size: 0.9rem;
   font-weight: 500;
 }
-
-ion-segment-button[aria-checked="true"] {
-  color: #ffffff;
-}
-
-ion-segment {
-  --indicator-color: var(--lnw-lila);
-}
+ion-segment-button[aria-checked="true"] { color: #ffffff; }
+ion-segment { --indicator-color: var(--lnw-lila); }
 
 @media (min-width: 768px) {
   ion-toolbar.toolbar-normal {
@@ -48,24 +34,16 @@ ion-segment {
   }
 }
 
-
 /* ===== Content Hintergrund ==== */
-
-ion-content {
-  --background: #ffffff;
-  color: var(--ion-text-color);
-}
-
+ion-content { --background: #ffffff; color: var(--ion-text-color); }
 
 /* ===== Listen (Auswahl) ======= */
-
 ion-list {
   background: #ffffff;
   margin: 0;
   align-items: center;
   padding: 0.5rem;
 }
-
 ion-list ion-item {
   --background: #ffffff;
   --color: var(--lnw-lila);
@@ -73,21 +51,14 @@ ion-list ion-item {
   font-weight: 500;
   margin: 0.5rem 0;
 }
-
-ion-list ion-item ion-icon {
-  color: #6748B1;
-  padding-left: 0.625rem;
-}
-
+ion-list ion-item ion-icon { color: #6748B1; padding-left: 0.625rem; }
 
 /* ===== Gruppen-Header ========= */
-
 .group-header {
   --background: #ffffff;
   padding: 0.125rem;
   border-bottom: 0.125rem solid #E0E0E0;
 }
-
 .group-header ion-label h2 {
   margin-top: 0.25rem;
   font-size: 1.1rem;
@@ -95,9 +66,7 @@ ion-list ion-item ion-icon {
   color: #F6692C;
 }
 
-
 /* ===== Karten Styling ========= */
-
 ion-card {
   background: #ffffff;
   border: 0.0625rem solid #eee;
@@ -109,7 +78,6 @@ ion-card {
      0.25rem 0.25rem 0.25rem rgba(0,0,0,0.24);
   box-shadow: var(--box-shadow);
 }
-
 ion-card-header {
   position: relative;
   background-color: #F5F3F5;
@@ -117,16 +85,24 @@ ion-card-header {
   border-radius: 0.5rem 0.5rem 0 0;
 }
 
+/* FAV-Herz: immer gefüllt, Outline nie sichtbar */
 .fav-heart {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
   font-size: 1.25rem;
-  z-index: 10;
+  z-index: 0;
+  color: rgba(0, 0, 0, 0.25); /* dezentes Grau, kein Outline-Icon */
+  transition: color 160ms ease;
+}
+.fav-heart.is-fav {
+  color: #F6692C !important; /* aktiv = orange */
 }
 
-.fav-heart[name="heart"] { color: #F6692C !important; }
-.fav-heart[name="outline-heart"] { color: #bbb; }
+
+.fav-heart { opacity: 0; pointer-events: auto; }
+.fav-heart.is-fav { opacity: 1; }
+
 
 ion-card-title {
   font-size: 0.95rem;
@@ -134,7 +110,6 @@ ion-card-title {
   margin: 0;
   color: var(--ion-text-color);
 }
-
 ion-card-subtitle {
   font-size: 0.8rem;
   font-weight: 550;
@@ -144,23 +119,15 @@ ion-card-subtitle {
   align-items: center;
   color: var(--ion-text-color);
 }
-
 .time {
   font-size: 0.75rem;
   display: flex;
   align-items: center;
   gap: 0.25rem;
 }
+.time ion-icon { font-size: 0.875rem; color: var(--ion-text-color); }
 
-.time ion-icon {
-  font-size: 0.875rem;
-  color: var(--ion-text-color);
-}
-
-ion-card-content {
-  background-color: #ffffff;
-  padding: 0.5rem 0.75rem;
-}
+ion-card-content { background-color: #ffffff; padding: 0.5rem 0.75rem; }
 
 /* Meta-Icons + Format rechts */
 .meta-icons {
@@ -169,24 +136,13 @@ ion-card-content {
   align-items: center;
   margin-top: 0.25rem;
 }
-
 .meta-icons .left-icons {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-
-.meta-icons .left-icons ion-icon {
-  font-size: 1.25rem;
-  color: #F6692C;
-}
-
-.meta-icons .divider {
-  width: 0.0625rem;
-  height: 0.875rem;
-  background-color: #F6692C;
-}
-
+.meta-icons .left-icons ion-icon { font-size: 1.25rem; color: #F6692C; }
+.meta-icons .divider { width: 0.0625rem; height: 0.875rem; background-color: #F6692C; }
 .format-text {
   font-size: 0.85rem;
   font-weight: 600;
@@ -195,9 +151,7 @@ ion-card-content {
   color: var(--ion-text-color);
 }
 
-
 /* ===== FAB Styling ============ */
-
 ion-fab-button.fab-orange {
   --background: #F6692C;
   --background-hover: #f87f4f;
@@ -208,7 +162,6 @@ ion-fab-button.fab-orange {
   --box-shadow: none;
   transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
 }
-
 ion-fab-button.fab-orange::part(native) {
   border-radius: 50%;
   box-shadow: 0 0.625rem 1.5rem rgba(0,0,0,0.16),
@@ -216,19 +169,16 @@ ion-fab-button.fab-orange::part(native) {
   -webkit-transform: translateZ(0);
   will-change: box-shadow, transform;
 }
-
 ion-fab-button.fab-orange:hover::part(native) {
   box-shadow: 0 0.75rem 1.75rem rgba(0,0,0,0.18),
               0 0 1rem 0.5625rem rgba(246,105,44,0.1);
 }
-
 ion-fab-button.fab-orange:active::part(native),
 ion-fab-button.fab-orange.ion-activated::part(native) {
   transform: translateY(0.0625rem) scale(0.98);
   box-shadow: 0 0.5rem 1.125rem rgba(0,0,0,0.16),
               0 0 0.75rem 0.4375rem rgba(246,105,44,0.10);
 }
-
 ion-fab-button.fab-orange ion-icon { font-size: 1.75rem; }
 
 ion-fab-button.fab-action {
@@ -238,7 +188,6 @@ ion-fab-button.fab-action {
   --border-radius: 50%;
   --box-shadow: none;
 }
-
 ion-fab-button.fab-action::part(native) {
   border: 0.0625rem solid rgba(246,105,44,0.28);
   border-radius: 50%;
@@ -246,11 +195,7 @@ ion-fab-button.fab-action::part(native) {
               0 0 0.625rem 0.375rem rgba(246,105,44,0.10);
   -webkit-transform: translateZ(0);
 }
-
-ion-fab[activated] ion-fab-button.fab-action::part(native) {
-  animation: fab-pop 160ms ease;
-}
-
+ion-fab[activated] ion-fab-button.fab-action::part(native) { animation: fab-pop 160ms ease; }
 @keyframes fab-pop {
   from { transform: scale(0.9); opacity: 0.8; }
   to   { transform: scale(1); opacity: 1; }
@@ -273,25 +218,14 @@ ion-fab-button.fab-orange .fab-badge {
               0 0 0.625rem 0.25rem rgba(246,105,44,0.16);
   pointer-events: none;
 }
-
 ion-fab-button.fab-action.active {
   --background: #F6692C;
   --color: #ffffff;
 }
 
-
 /* ===== Sonstiges Styling ====== */
-
-ion-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.item-text {
-  flex: 1;
-}
-
+ion-item { display: flex; align-items: center; justify-content: space-between; }
+.item-text { flex: 1; }
 .count-badge {
   display: inline-flex;
   align-items: center;

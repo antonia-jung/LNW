@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { EintragComponent } from '../components/eintrag/eintrag.component';
 type FilterKey = 'kinder' | 'barrierefrei' | 'english';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'app-tab2',
   templateUrl: './tab2.page.html',
   styleUrls: ['./tab2.page.scss'],
@@ -33,8 +34,8 @@ export class Tab2Page {
     english: false,
   };
 
-  visibleEntries = 30; // Anzahl aktuell sichtbarer Einträge
-  increment = 30; // Anzahl, die bei Scroll nachgeladen wird
+  visibleEntries = 30;
+  increment = 30;
 
   selectedSegment: string = 'Komplett';
   contentSelector: string = 'Komplett';
@@ -54,18 +55,14 @@ export class Tab2Page {
   /* ============================= */
   /* ======== Utility Methods ===== */
   /* ============================= */
-
-  // TrackBy für ngFor, verbessert Performance
   trackById(_: number, item: EintragData) {
     return `${item.id}-${item.termin_id}`;
   }
 
-  // Navigation zur Detailseite
   openDetail(item: EintragData) {
     this.router.navigate(['/detail', item.id, item.termin_id]);
   }
 
-  // Navigation zum Impressum
   goImpressum() {
     this.router.navigateByUrl('/impressum', { replaceUrl: false });
   }
@@ -88,9 +85,17 @@ export class Tab2Page {
   /* ============================= */
   /* ======== Favoriten ========== */
   /* ============================= */
-  async toggleFavorit(item: EintragData) {
-    await this.getdata.toogleFavorit(item.id, item.termin_id);
-    item.favorit = this.getdata.isFavorit(item.id, item.termin_id);
+  async onToggleFavorit(item: EintragData, ev?: Event) {
+    if (ev) ev.stopPropagation();
+
+    const prev = !!item.favorit;
+    item.favorit = !prev; // Optimistisch toggeln → sofort sichtbar
+
+    try {
+      await this.getdata.toogleFavorit(item.id, item.termin_id);
+    } catch {
+      item.favorit = prev; // Rollback bei Fehler
+    }
   }
 
   /* ============================= */
@@ -118,7 +123,6 @@ export class Tab2Page {
 
     let entries: EintragData[] = [];
 
-    // Filtern nach Segment + Theme
     switch (this.contentSelector) {
       case 'Komplett':
         entries = [...this.getdata.data];
@@ -156,13 +160,11 @@ export class Tab2Page {
         break;
     }
 
-    // Favoriten markieren
     this.eintraege = entries.map((item) => ({
       ...item,
       favorit: favSet.has(`${item.id}::${item.termin_id}`),
     }));
 
-    // Einträge sortieren nach Zeit & Titel
     this.eintraege.sort((a, b) =>
       a.beginn > b.beginn
         ? 1
@@ -261,8 +263,6 @@ export class Tab2Page {
   /* ============================= */
   /* ======== Hilfsfunktionen ===== */
   /* ============================= */
-
-  // Nur Überschrift für neue Zeit anzeigen
   setBeginn(eintrag: EintragData, index: number): boolean {
     if (index === 0 || eintrag.beginn !== this.lastBeginn) {
       this.lastBeginn = eintrag.beginn;
@@ -271,7 +271,6 @@ export class Tab2Page {
     return false;
   }
 
-  // Anzahl Einträge pro Thema / Format / Ort / Einrichtung
   getCountForTheme(theme: string): number {
     return this.getdata.data.filter((e) =>
       e.themen
