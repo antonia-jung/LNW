@@ -7,69 +7,129 @@
   color: var(--ion-text-color);
 }
 
-/* Toolbar/Header */
+/* ============================= */
+/* ===== Toolbar/Header ========= */
+/* ============================= */
 ion-toolbar {
   --background: linear-gradient(to right, #6748B1, #4B3991);
   --color: #ffffff;
 }
-ion-toolbar ion-title { color: #ffffff; }
-ion-toolbar ion-button { --color: #ffffff; color: #ffffff; }
-ion-toolbar ion-icon { color: #ffffff; }
+ion-toolbar ion-title,
+ion-toolbar ion-button,
+ion-toolbar ion-icon {
+  color: #ffffff;
+}
 
-/* Content Hintergrund & Standardtextfarbe */
+/* zweite Toolbar (Segment) */
+ion-toolbar.toolbar-normal {
+  --background: #ffffff;
+  --color: var(--lnw-lila);
+ 
+}
+
+/* Segment Buttons */
+ion-segment-button {
+  --color: var(--lnw-lila);
+  --indicator-color: #6748B1;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ============================= */
+/* ===== Content Hintergrund ==== */
+/* ============================= */
 ion-content {
   --background: #ffffff;
   color: var(--ion-text-color);
 }
 
 /* ============================= */
-/* ===== Gruppen-Header ======== */
+/* ===== Listen (Auswahl) ======= */
+/* ============================= */
+ion-list {
+  background: #ffffff;
+  margin: 0;
+  align-items: center;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+ion-list ion-item {
+  --background: #ffffff;
+  --color: var(--lnw-lila);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.5rem 0 0.5rem 0;
+  
+  
+}
+
+ion-list ion-item ion-icon {
+  color: #6748B1;
+  padding-left: 1rem;
+}
+
+/* ============================= */
+/* ===== Gruppen-Header ========= */
 /* ============================= */
 .group-header {
   --background: #ffffff;
-  padding: 10px 18px;
+  padding: 2px 2px;
   border-bottom: 2px solid #E0E0E0;
 
   ion-label h2 {
     margin-top: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: #F6692C;
   }
 }
 
 /* ============================= */
-/* ===== Karten Styling ======== */
+/* ===== Karten Styling ========= */
 /* ============================= */
 ion-card {
-  --background: #ffffff;
-  --color: var(--ion-text-color);
-  overflow: hidden;
-  box-shadow: -1px -1px 4px rgba(0,0,0,0.18), 4px 4px 4px rgba(0,0,0,0.24);
+  background: #ffffff;
+  border: 1px solid #eee;
   border-radius: 8px;
-  margin: 12px 16px; /* mehr Abstand zum Bildschirmrand */
+  margin: 12px 8px;
+   overflow: hidden; /* wichtig für runde Ecken am farbigen Header */
+
+  /* Asymmetrischer Schatten:
+     - erste Ebene: sehr subtil oben/links (negative Offsets)
+     - zweite Ebene: stärker rechts/unten (positive Offsets)
+  */
+  --box-shadow:
+    -1px -1px 4px rgba(0,0,0,0.18),
+     4px 4px 4px rgba(0,0,0,0.24);
+  box-shadow: var(--box-shadow);
 }
+
 /* Kartenkopf */
 ion-card-header {
-  position: relative; /* wichtig für absolute Positionierung */
+  position: relative;
   background-color: #F5F3F5;
   padding: 8px 12px;
   border-radius: 8px 8px 0 0;
-    min-height: 50px; /* Mindesthöhe */
 }
 
+/* Favoriten-Herz */
 .fav-heart {
   position: absolute;
   top: 8px;
   right: 8px;
   font-size: 20px;
-  color: #F6692C;
   z-index: 10;
 }
-
-.fav-heart.outline-heart {
-  color: #F5F3F5; // andere Farbe für Outline-Herz
+.fav-heart[name="heart"] {
+  color: #F6692C !important;
 }
+.fav-heart[name="outline-heart"] {
+  color: #bbb;
+}
+
 /* Titel + Uhrzeit */
 ion-card-title {
   font-size: 0.95rem;
@@ -77,38 +137,24 @@ ion-card-title {
   margin: 0;
   color: var(--ion-text-color);
 }
-
 ion-card-subtitle {
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 550;
   margin-top: 2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--ion-text-color);
 }
-
 .time {
   font-size: 12px;
-  color: var(--ion-text-color);
   display: flex;
   align-items: center;
-  gap: 4px; /* Abstand zwischen Icon und Text */
+  gap: 4px;
 }
-
 .time ion-icon {
   font-size: 14px;
   color: var(--ion-text-color);
-}
-
-/* Favoriten-Herz */
-.fav-indicator {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 24px;
-  color: #F6692C;
-  text-shadow: 0 0 4px rgba(0,0,0,0.3);
 }
 
 /* Karteninhalt */
@@ -122,24 +168,23 @@ ion-card-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin-top: 4px;
 
   .left-icons {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-  ion-icon {
-    font-size: 20px;
-    color: #F6692C;
+    ion-icon {
+      font-size: 20px;
+      color: #F6692C;
+    }
+    .divider {
+      width: 1px;
+      height: 14px;
+      background-color: #F6692C;
+    }
   }
-
-  .divider {
-    width: 1px;
-    height: 16px;
-    background-color: #F6692C;
-  }
-}
 
   .format-text {
     font-size: 0.85rem;
@@ -150,9 +195,7 @@ ion-card-content {
   }
 }
 
-/* ============================= */
-/* ===== FAB Buttons =========== */
-/* ============================= */
+/* Haupt-FAB (orange, rund) */
 ion-fab-button.fab-orange {
   --background: #F6692C;
   --background-hover: #f87f4f;
@@ -160,14 +203,18 @@ ion-fab-button.fab-orange {
   --color: #ffffff;
   --ripple-color: rgba(255,255,255,0.3);
   --border-radius: 50%;
-  box-shadow: none;
+  --box-shadow: none; /* vermeiden, wir setzen den Schatten am inneren Part */
+
   transition: box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
 }
+/* runder, weicher Schatten genau um die Rundung */
 ion-fab-button.fab-orange::part(native) {
   border-radius: 50%;
   box-shadow:
-    0 10px 24px rgba(0,0,0,0.16),
-    0 0 14px 8px rgba(246,105,44,0.10);
+    0 10px 24px rgba(0,0,0,0.16),          /* Tiefe nach unten */
+    0 0 14px 8px rgba(246,105,44,0.10);    /* weicher Halo rundum */
+  -webkit-transform: translateZ(0);
+  will-change: box-shadow, transform;
 }
 ion-fab-button.fab-orange:hover::part(native) {
   box-shadow:
@@ -183,13 +230,13 @@ ion-fab-button.fab-orange.ion-activated::part(native) {
 }
 ion-fab-button.fab-orange ion-icon { font-size: 28px; }
 
-/* Action-FABs */
+/* Action-FABs (erscheinen darüber) */
 ion-fab-button.fab-action {
   --background: #ffffff;
   --color: #F6692C;
   --ripple-color: rgba(246,105,44,0.15);
   --border-radius: 50%;
-  box-shadow: none;
+  --box-shadow: none;
 }
 ion-fab-button.fab-action::part(native) {
   border: 1px solid rgba(246,105,44,0.28);
@@ -197,28 +244,55 @@ ion-fab-button.fab-action::part(native) {
   box-shadow:
     0 8px 18px rgba(0,0,0,0.10),
     0 0 10px 6px rgba(246,105,44,0.10);
+  -webkit-transform: translateZ(0);
 }
-ion-fab-button.fab-action.active {
-  --background: #F6692C;
-  --color: #ffffff;
+ion-fab[activated] ion-fab-button.fab-action::part(native) {
+  /* optional: leichtes Pop-in bei aktiviertem Zustand */
+  animation: fab-pop 160ms ease;
+}
+@keyframes fab-pop {
+  from { transform: scale(0.9); opacity: 0.8; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
-/* Badge oben links auf FAB */
+/* Badge-Icon (klein, oben/links am Rand des FAB) */
 ion-fab-button.fab-orange .fab-badge {
   position: absolute;
-  top: -4px;
+  top: -4px;            /* leicht über die Rundung hinaus */
   left: -4px;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #ffffff;
-  color: #F6692C;
+  background: #ffffff;  /* weißer Kreis hinter dem Icon */
+  color: #F6692C;       /* Icon orange */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 14px;      /* Icon-Größe */
   box-shadow:
     0 4px 10px rgba(0,0,0,0.16),
-    0 0 10px 4px rgba(246,105,44,0.16);
-  pointer-events: none;
+    0 0 10px 4px rgba(246,105,44,0.16);  /* weicher runder Halo */
+  pointer-events: none; /* nicht anklickbar */
+}
+
+
+/* Aktive Filter optisch hervorheben */
+ion-fab-button.fab-action.active {
+  --background: #F6692C;   /* Orange */
+  --color: #ffffff;
+}
+
+/* ============================= */
+/* ===== Segmente Styling ====== */
+/* ============================= */
+ion-segment-button {
+  color: var(--lnw-lila); /* inaktiv = lila */
+}
+
+ion-segment-button[aria-checked="true"] {
+  color: #ffffff; /* aktiv = weiß */
+}
+
+ion-segment {
+  --indicator-color: var(--lnw-lila); /* Scroller lila */
 }

@@ -15,22 +15,46 @@
         value="Komplett"
         (click)="setSegmentLabel('Komplett')"
       >
-        <ion-icon src="../../../assets/myicons/Programm.svg"></ion-icon>
+        <ion-icon
+          src="../../../assets/Programm.svg"
+          [style.color]="selectedSegment === 'Komplett' ? '#ffffff' : 'var(--lnw-lila)'"
+        >
+        </ion-icon>
       </ion-segment-button>
+
       <ion-segment-button value="Themen" (click)="setSegmentLabel('Themen')">
-        <ion-icon src="../../../assets/myicons/Themen.svg"></ion-icon>
+        <ion-icon
+          src="../../../assets/Themen.svg"
+          [style.color]="selectedSegment === 'Themen' ? '#ffffff' : 'var(--lnw-lila)'"
+        >
+        </ion-icon>
       </ion-segment-button>
+
       <ion-segment-button value="Formate" (click)="setSegmentLabel('Formate')">
-        <ion-icon src="../../../assets/myicons/Formate.svg"></ion-icon>
+        <ion-icon
+          src="../../../assets/Formate.svg"
+          [style.color]="selectedSegment === 'Formate' ? '#ffffff' : 'var(--lnw-lila)'"
+        >
+        </ion-icon>
       </ion-segment-button>
+
       <ion-segment-button value="Orte" (click)="setSegmentLabel('Orte')">
-        <ion-icon src="../../../assets/myicons/orte.svg"></ion-icon>
+        <ion-icon
+          src="../../../assets/orte.svg"
+          [style.color]="selectedSegment === 'Orte' ? '#ffffff' : 'var(--lnw-lila)'"
+        >
+        </ion-icon>
       </ion-segment-button>
+
       <ion-segment-button
         value="Einrichtungen"
         (click)="setSegmentLabel('Einrichtungen')"
       >
-        <ion-icon src="../../../assets/myicons/Einrichtungen.svg"></ion-icon>
+        <ion-icon
+          src="../../../assets/Einrichtungen.svg"
+          [style.color]="selectedSegment === 'Einrichtungen' ? '#ffffff' : 'var(--lnw-lila)'"
+        >
+        </ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -63,7 +87,10 @@
       </ion-item>
     </ion-list>
 
-    <ion-list *ngIf="contentSelector === 'Einrichtungen'">
+    <ion-list
+      *ngIf="contentSelector === 'Einrichtungen'"
+      class="einrichtungen-list"
+    >
       <ion-item
         *ngFor="let inst of uniqueEinrichtungen"
         (click)="selectTheme(inst)"
@@ -94,7 +121,7 @@
           <ion-icon
             *ngIf="item.favorit !== undefined"
             class="fav-heart"
-            [name]="item.favorit ? 'heart' : 'heart-outline'"
+            [name]="item.favorit ? 'heart' : 'outline-heart'"
             [style.color]="item.favorit ? 'var(--ion-color-danger)' : 'gray'"
             (click)="toggleFavorit(item); $event.stopPropagation()"
           ></ion-icon>

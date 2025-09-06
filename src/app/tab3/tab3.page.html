@@ -32,14 +32,13 @@
         <ion-card-header>
           <ion-card-title>{{ item.titel }}</ion-card-title>
           <ion-card-subtitle *ngIf="item.beginn || item.ende">
-            <ion-icon
-              class="time"
-              name="time-outline"
-              aria-hidden="true"
-            ></ion-icon>
-            {{ formatTime(item.beginn) }}<ng-container *ngIf="item.ende">
-              –&nbsp;{{ formatTime(item.ende) }}
-            </ng-container>
+            <span class="time">
+              <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+              {{ formatTime(item.beginn) }}
+              <ng-container *ngIf="item.ende"
+                >–&nbsp;{{ formatTime(item.ende) }}</ng-container
+              >
+            </span>
           </ion-card-subtitle>
 
           <!-- Favoriten-Indikator (nur Anzeige, kein Button) -->
@@ -59,29 +58,25 @@
                 <ion-icon
                   src="assets/lndw_icon_kids.svg"
                   title="Kinder geeignet"
-                  aria-label="Kinder geeignet"
                 ></ion-icon>
-                <span
-                  class="divider"
-                  *ngIf="(item.barrierefrei || item.english)"
-                  >|</span
-                >
               </ng-container>
 
               <ng-container *ngIf="item.barrierefrei">
+                <span class="divider" *ngIf="item.kinder"></span>
                 <ion-icon
                   src="assets/lndw_icon_barrierenfrei.svg"
                   title="Barrierefrei"
-                  aria-label="Barrierefrei"
                 ></ion-icon>
-                <span class="divider" *ngIf="item.english">|</span>
               </ng-container>
 
               <ng-container *ngIf="item.english">
+                <span
+                  class="divider"
+                  *ngIf="item.kinder || item.barrierefrei"
+                ></span>
                 <ion-icon
                   src="assets/lndw_icon_englisch.svg"
                   title="English available"
-                  aria-label="Englisch verfügbar"
                 ></ion-icon>
               </ng-container>
             </div>

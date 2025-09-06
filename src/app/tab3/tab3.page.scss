@@ -25,24 +25,30 @@ ion-item { --color: var(--ion-text-color); }
 ion-label, h1, h2, h3, h4, h5, h6, p, span { color: inherit; }
 
 /* Zeit-Icon in Karten */
-.time { font-size: 12px; color: var(--ion-text-color); }
+
 
 /* Meta-Icons + Format rechts */
 .meta-icons {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 8px;
+  margin: 8px;
 
   .left-icons {
     display: flex;
-    gap: 8px;
+    align-items: center; /* Icon vertikal mittig */
+    gap: 8px; /* Abstand zwischen den Icons */
+  }
 
-    ion-icon {
-      font-size: 20px;
-      color: #F6692C;
-      position: relative;
-    }
+  .left-icons ion-icon {
+    font-size: 20px;
+    color: #F6692C;
+  }
+
+  .left-icons .divider {
+    width: 1px;
+    height: 14px;
+    background-color: #F6692C; /* orangener Divider */
   }
 
   .format-text {
@@ -51,25 +57,21 @@ ion-label, h1, h2, h3, h4, h5, h6, p, span { color: inherit; }
     text-align: right;
     min-width: 80px;
     color: var(--ion-text-color);
-  }
-
-  .divider {
-    margin: 0 2px;
-    color: #F6692C;
-    font-size: 14px;
+    margin-right: -14px;
   }
 }
+
 
 /* Gruppen-Header (Uhrzeit-Zeile) */
 .group-header {
   --background: #ffffff;
-  padding: 4px 4px;
+  padding: 2px 2px;
   border-bottom: 2px solid #E0E0E0; /* dezente Trennung */
 
   ion-label h2 {
     margin-top: 0.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: #F6692C; /* ggf. auf var(--ion-text-color) ändern */
   }
 }
@@ -78,8 +80,10 @@ ion-label, h1, h2, h3, h4, h5, h6, p, span { color: inherit; }
 
 /* Karte hell halten (auch im Dark Mode) + abgerundete Ecken für Header-Hintergrund */
 ion-card {
-  --background: #ffffff;
-  --color: var(--ion-text-color);
+   background: #ffffff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin: 12px 8px;
   overflow: hidden; /* wichtig für runde Ecken am farbigen Header */
 
   /* Asymmetrischer Schatten:
@@ -94,39 +98,53 @@ ion-card {
 
 /* >>> Karten-Kopf einfärben (Titel + Uhrzeit) */
 ion-card-header {
-  --background: #F5F3F5;   /* falls vom Web Component ausgewertet */
-  background: #F5F3F5;     /* Fallback/Sicherheit */
+  position: relative;
+  background-color: #F5F3F5;
+  padding: 8px 12px;
+  border-radius: 8px 8px 0 0;
 }
 
 /* Texte im Kartenkopf weiterhin in Lila */
-ion-card-title,
-ion-card-subtitle {
-  color: var(--ion-text-color);
-}
 
-ion-card-subtitle {
-  font-size: 0.7rem;    /* etwas kleiner als Titel */
-  margin-bottom: 0.4rem;   /* Abstand zum Titel */
-}
+
 /* Karten-Inhalt (weiß) */
 ion-card-content {
   background-color: #ffffff;
   height: 1.8rem;
+  padding-left: 4px;
 }
 
 ion-card-title {
-  font-size: 0.95rem;      /* z.B. 16px – gern auf 0.95rem/0.9rem anpassen */
-  line-height: 1.25;    /* kompakter */
-  font-weight: 650;     /* etwas kräftiger, bleibt gut lesbar */
-  margin: 0;       
-       /* saubere Ausrichtung */
+  font-size: 0.95rem;
+  font-weight: 650;
+  margin: 0;
+  color: var(--ion-text-color);
+}
+ion-card-subtitle {
+  font-size: 0.7rem;
+  font-weight: 550;
+  margin-top: 2px;
+  display: flex;
+  align-items: center; /* alles linksbündig */
+  color: var(--ion-text-color);
+}
+
+.time {
+  display: flex;
+  align-items: center; /* Icon und Text vertikal mittig */
+  gap: 4px;           /* kleine Lücke zwischen Icon und Text */
+  color: var(--ion-text-color); /* optional */
+}
+.time ion-icon {
+  font-size: 14px;
+  color: var(--ion-text-color);
 }
 
 .fav-indicator {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 24px;
+  top: 8px;
+  right: 8px;
+  font-size: 20px;
   color: #F6692C; /* Orange, passend zu deinem Farbschema */
   text-shadow: 0 0 4px rgba(0,0,0,0.3); /* leichter Schatten für bessere Sichtbarkeit */
 }
